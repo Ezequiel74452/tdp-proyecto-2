@@ -5,7 +5,7 @@ import java.awt.Image;
 public abstract class Pieza {
 
 	//Parámetros y métodos de referencia, es posible que el tipo de la textura y color cambien así como los métodos que dependen de estos.
-	protected Cubo[][] pieza; 
+	protected Cubo[][] forma; 
 	protected Image textura;
 	protected String color;
 	protected Cubo cubo1, cubo2, cubo3, cubo4;
@@ -39,11 +39,11 @@ public abstract class Pieza {
 		}
 	}
 	public void setCubo(Cubo cu, int f, int c) {
-		pieza[f][c] = cu;
+		forma[f][c] = cu;
 	}
 	private void eliminarFila(int pos) {
-		for (int i=0; i<pieza[pos].length; i++) {
-			pieza[pos][i] = null;
+		for (int i=0; i<forma[pos].length; i++) {
+			forma[pos][i] = null;
 		}
 	}
 	public void eliminarFilas(int cant) {
@@ -68,5 +68,13 @@ public abstract class Pieza {
 		}
 	}
 	public abstract void acomodarCubos();
-	
+	public void moverIzquierda() {
+		
+	}
+	public void moverDerecha() {
+		
+	}
+	public void rotar() {
+		
+	}
 }
