@@ -10,10 +10,10 @@ public class Forma2 extends Tetrimino {
 	}
 	
 	protected void acomodarCubos() {
-		setCubo(cubo1, 0, 3);
-		setCubo(cubo2, 1, 1);
-		setCubo(cubo3, 1, 2);
-		setCubo(cubo4, 1, 3);
+		setCubo(bloques[0], 0, 3);
+		setCubo(bloques[1], 1, 1);
+		setCubo(bloques[2], 1, 2);
+		setCubo(bloques[3], 1, 3);
 	}
 
 	@Override

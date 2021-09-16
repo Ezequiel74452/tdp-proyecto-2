@@ -3,14 +3,15 @@ package Game;
 public abstract class Tetrimino {
 	
 	protected Bloque[][] grilla;
-	protected Bloque cubo1, cubo2, cubo3, cubo4; 
+	protected Bloque[] bloques;
 	
 	public Tetrimino(int rndm) {
 		grilla = new Bloque[4][4];
-		cubo1 = new Bloque(rndm, true);
-		cubo2 = new Bloque(rndm, true);
-		cubo3 = new Bloque(rndm, true);
-		cubo4 = new Bloque(rndm, true);
+		Bloque cubo1 = new Bloque(rndm, true);
+		Bloque cubo2 = new Bloque(rndm, true);
+		Bloque cubo3 = new Bloque(rndm, true);
+		Bloque cubo4 = new Bloque(rndm, true);
+		bloques = new Bloque[] {cubo1, cubo2, cubo3, cubo4};
 	}
 	
 	
@@ -51,7 +52,10 @@ public abstract class Tetrimino {
 		
 	}
 	public abstract void rotar();
-	public Bloque getBloque(int f, int c) {
+	public Bloque getBloquePos(int f, int c) {
 		return grilla[f][c];
+	}
+	public Bloque getBloque(int pos) {
+		return bloques[pos];
 	}
 }

@@ -72,11 +72,61 @@ public class Juego {
 	private void setTetrimino() {
 		for(int i=1; i<3; i++) {
 			for(int j=4; j<8; j++) {
-				if (tactual!=null && tactual.getBloque(i-1, j-4)!=null) {
-					setBloque(tactual.getBloque(i-1, j-4), i, j);
+				if (tactual!=null && tactual.getBloquePos(i-1, j-4)!=null) {
+					setBloque(tactual.getBloquePos(i-1, j-4), i, j);
+					grilla[i][j].setX(i);
+					grilla[i][j].setY(j);
 				}
 			}
 		}
+	}
+	
+	public void moverIzq() {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].hayBloque() == true) {
+				if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].getRecienPuesto())) {
+					sePuede = false;
+				}
+			}
+		}
+		if (sePuede) {
+			for (int j=0; j<4; j++) {
+				int x = tactual.getBloque(j).getX();
+				int y = tactual.getBloque(j).getY();
+				Bloque aux = grilla[x][y-1];
+				grilla[x][y-1] = tactual.getBloque(j);
+				tactual.getBloque(j).setY(y-1);
+				grilla[x][y] = aux;
+			}
+		}
+	}
+	
+	/* public void moverIzq() {
+		int cont=0;
+		for(int i=1; i<21 && cont<4; i++) {
+			for (int j=1; j<11; j++) {
+				if(obtenerBloque(i, j).getRecienPuesto() && !obtenerBloque(i, j-1).hayBloque()) {
+					cont++;
+				}
+			}
+		}
+		if (cont==4) {
+			for(int i=1; i<21 && cont>0; i++) {
+				for (int j=1; j<11; j++) {
+					if(obtenerBloque(i, j).getRecienPuesto() && !obtenerBloque(i, j-1).hayBloque()) {
+						cont--;
+						Bloque bAux = grilla[i][j-1];
+						grilla[i][j-1] = obtenerBloque(i, j);
+						grilla[i][j] = bAux;
+					}
+				}
+			}
+		}
+	} */
+	
+	public void moverDer() {
+		
 	}
 	
 	public int getPuntos() {

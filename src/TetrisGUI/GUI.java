@@ -50,8 +50,12 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		setForeground(Color.WHITE);
-		Dimension test = new Dimension(277, 531);
-		//setExtendedState(6);
+		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30;
+		double width = (height/23)*12;
+		Dimension test = new Dimension(383, (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30);
+		test.setSize(width, height);
+		//Dimension test = new Dimension(383, 735);
+		//setExtendedState(6); FullScreen
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(test);
@@ -69,7 +73,8 @@ public class GUI extends JFrame {
 			for(int j=0; j<12; j++) {
 				JLabel lblNewLabel = new JLabel();
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+				lblNewLabel.setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
+				//lblNewLabel.setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance(29, 29, Image.SCALE_DEFAULT)));
 				contentPane.add(lblNewLabel);
 			}
 		}
