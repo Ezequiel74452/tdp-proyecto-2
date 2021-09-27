@@ -1,10 +1,20 @@
 package Game;
 
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import TetrisGUI.GUI;
+import exceptions.ImposibleRotar;
 
 public class Juego {
 	
-	private Bloque[][] grilla;
+	protected Bloque[][] grilla;
 	private int puntos;
 	private Tetrimino tactual;
 	
@@ -14,7 +24,10 @@ public class Juego {
 		crearGrillaInicial();
 		puntos = 0;
 		tactual = null;
+		
+		
 	}
+	
 	
 	private void crearPerimetro() {
 		Bloque borde = new Bloque(0, true);
@@ -140,4 +153,67 @@ public class Juego {
 	public Bloque obtenerBloque(int f, int c) {
 		return grilla[f][c];
 	}
+	
+	public void rotar() throws ImposibleRotar {
+		
+		boolean solapado = false;
+		int [][] matrizRotada;
+		int i=0;
+		
+		matrizRotada = tactual.rotar();
+		
+		while(!solapado && (i<4) ) {
+			
+			solapado = Solapa(matrizRotada[i][0],matrizRotada[i][1]);
+			i++;			
+		}
+		
+		if (solapado)
+			throw new ImposibleRotar("error: El tetrimino no puede rotar en esa posición");
+		else
+			{
+			for(i=0;i<4;i++)
+			{
+				Bloque empty = new Bloque(1, false);
+				grilla[tactual.getXt()][tactual.getYt()]=empty;
+			}
+			for(i=0;i<4;i++)
+			{
+				grilla[matrizRotada[i][0]][matrizRotada[i][1]]=tactual.bloques[i];
+				tactual.bloques[i].setX(matrizRotada[i][0]);
+				tactual.bloques[i].setY(matrizRotada[i][1]);
+			}
+			
+			}
+	}
+	
+	private boolean Solapa(int x, int y) {
+		
+		boolean solapado=false;
+		
+		if (grilla[x][y].hayBloque() && !grilla[x][y].getRecienPuesto() )
+		solapado = true;
+		
+		return solapado;
+		
+	}
+	
+	public void keyPressed(KeyEvent e) {
+
+
+        int keycode = e.getKeyCode();
+
+       
+        try {
+			switch (keycode) {
+
+			    case KeyEvent.VK_Z -> rotar();
+      
+			}
+		} catch (ImposibleRotar e1) {
+			System.out.println(e1.getMessage());
+		}
+    }
+	
+	
 }

@@ -27,7 +27,9 @@ import java.awt.Color;
 
 public class GUI extends JFrame {
 
-	private JPanel contentPane;
+	private static JPanel contentPane;
+	private static double height;
+	private static double width;
 
 	/**
 	 * Launch the application.
@@ -50,8 +52,8 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		setForeground(Color.WHITE);
-		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30;
-		double width = (height/23)*12;
+		height = Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30;
+		width = (height/23)*12;
 		Dimension test = new Dimension(383, (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30);
 		test.setSize(width, height);
 		//Dimension test = new Dimension(383, 735);
@@ -85,5 +87,7 @@ public class GUI extends JFrame {
 		
 		
 	}
-
+	
+	
+	
 }

@@ -16,9 +16,5 @@ public class Forma5 extends Tetrimino {
 		setCubo(bloques[3], 0, 3);
 	}
 
-	@Override
-	public void rotar() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
