@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -85,12 +86,20 @@ public class GUI extends JFrame {
 						
 					}
 				});
-				Clip clip;
 				try {
+					Clip clip;
+					Random ran = new Random();
 					clip = AudioSystem.getClip();
-					AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-							getClass().getResourceAsStream("/Images/Music.wav"));
-						    clip.open(inputStream);
+					AudioInputStream inputStream;
+					if (ran.nextInt(1000) == 622) {
+						inputStream = AudioSystem.getAudioInputStream(
+								getClass().getResourceAsStream("/Sonidos/GiornosTheme.wav"));
+					    clip.open(inputStream);
+					} else {
+						inputStream = AudioSystem.getAudioInputStream(
+								getClass().getResourceAsStream("/Sonidos/Music.wav"));
+							    clip.open(inputStream);
+					}
 						    clip.start();
 				} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
 					e1.printStackTrace();
