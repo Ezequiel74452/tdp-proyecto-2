@@ -94,7 +94,7 @@ public class Juego {
 		}
 	}
 	
-	public void mover(int pos) {
+	/*public void mover(int pos) {
 		if (pos==0) {
 			moverDer();
 		} else {
@@ -138,7 +138,65 @@ public class Juego {
 				grilla[x][y] = aux;
 			}
 		}
+	}*/
+	
+	public void mover(int pos) {
+		if (pos==0) {
+			moverDer();
+		} else {
+			moverIzq();
+		}
+		
 	}
+	
+	private void moverIzq() {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].esSobre())) {
+				sePuede = false;
+			}
+		}
+		if (sePuede) {
+			for(int i=0;i<4;i++) {
+				Bloque empty = new Bloque(1);
+				grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()]=empty;
+			}
+			
+			for (int j=0; j<4; j++) {
+				int x = tactual.getBloque(j).getX();
+				int y = tactual.getBloque(j).getY();
+				//Bloque aux = grilla[x][y-1];
+				grilla[x][y-1] = tactual.getBloque(j);
+				tactual.getBloque(j).setY(y-1);
+				//grilla[x][y] = aux;
+			}
+		}
+	}
+	private void moverDer() {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()+1].esSobre())) {
+				sePuede = false;
+			}
+		}
+		if (sePuede) {
+			for(int i=0;i<4;i++) {
+				Bloque empty = new Bloque(1);
+				grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()]=empty;
+			}
+			
+			for (int j=3; j>=0; j--) {
+				int x = tactual.getBloque(j).getX();
+				int y = tactual.getBloque(j).getY();
+				//Bloque aux = grilla[x][y+1];
+				grilla[x][y+1] = tactual.getBloque(j);
+				tactual.getBloque(j).setY(y+1);
+				//grilla[x][y] = aux;
+			}
+		}
+	}
+	
+	
 	/* public void moverIzq() {
 		int cont=0;
 		for(int i=1; i<21 && cont<4; i++) {
@@ -178,7 +236,7 @@ public class Juego {
 		return tactual;
 	}
 	
-	public void descender() {
+	/*public void descender() {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
 			if(!(grilla[tactual.getBloque(i).getX()+1][tactual.getBloque(i).getY()].esSobre())) {
@@ -195,9 +253,33 @@ public class Juego {
 				grilla[x][y] = aux;
 			}
 		}
-	}
+	}*/
 	
-	/*public void rotar() throws ImposibleRotar {
+	public void descender() {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(!(grilla[tactual.getBloque(i).getX()+1][tactual.getBloque(i).getY()].esSobre())) {
+				sePuede = false;
+			}
+		}
+		if(sePuede) {
+			for(int i=0;i<4;i++) {
+				Bloque empty = new Bloque(1);
+				grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()]=empty;
+			}
+			
+			for(int i=3; i>=0; i--) {
+				
+				int x = tactual.getBloque(i).getX();
+				int y = tactual.getBloque(i).getY();
+				//Bloque aux = grilla[x+1][y];
+				grilla[x+1][y] = tactual.getBloque(i);
+				tactual.getBloque(i).setX(x+1);
+				//grilla[x][y] = aux;
+			}
+		}
+	}
+	public void rotar() throws ImposibleRotar {
 		
 		boolean solapado = false;
 		int [][] matrizRotada;
@@ -215,31 +297,31 @@ public class Juego {
 			throw new ImposibleRotar("error: El tetrimino no puede rotar en esa posición");
 		else
 			{
-			for(i=0;i<4;i++)
-			{
+			for( i=0;i<4;i++) {
 				Bloque empty = new Bloque(1);
-				grilla[tactual.getXt()][tactual.getYt()]=empty;
+				grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()]=empty;
 			}
+			
 			for(i=0;i<4;i++)
-			{
-				grilla[matrizRotada[i][0]][matrizRotada[i][1]]=tactual.bloques[i];
-				tactual.bloques[i].setX(matrizRotada[i][0]);
-				tactual.bloques[i].setY(matrizRotada[i][1]);
+			{	
+				tactual.getBloque(i).setX(matrizRotada[i][0]);
+				tactual.getBloque(i).setY(matrizRotada[i][1]);
+				grilla[matrizRotada[i][0]][matrizRotada[i][1]]=tactual.getBloque(i);
 			}
 			
 			}
-	} */
+	} 
 	
-	/* private boolean Solapa(int x, int y) {
+	 private boolean Solapa(int x, int y) {
 		
 		boolean solapado=false;
 		
-		if (grilla[x][y].hayBloque() && !grilla[x][y].getRecienPuesto() )
+		if (!grilla[x][y].esSobre() )
 		solapado = true;
 		
 		return solapado;
 		
-	} */
+	} 
 	
 	/* public void keyPressed(KeyEvent e) {
 

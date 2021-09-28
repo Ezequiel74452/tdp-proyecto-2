@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import Game.Bloque;
 import Game.Juego;
+import exceptions.ImposibleRotar;
 
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -61,6 +62,14 @@ public class GUI extends JFrame {
 						} else if (c == 'd') {
 							Tetris.mover(0);
 							actualizar();
+						} else if (c == 'q') {
+							try {
+								Tetris.rotar();
+								actualizar();
+							} catch (ImposibleRotar e1) {
+								System.out.println(e1.getMessage());
+							}
+							
 						} 
 					}
 
@@ -119,6 +128,7 @@ public class GUI extends JFrame {
 		    }
 		}, 0, 1000);
 	}
+	
 	public static void actualizar() {
 		for(int i=Tetris.getTetrimino().getAltMax()-1; i<=Tetris.getTetrimino().getAltMin(); i++) {
 			for(int j=Tetris.getTetrimino().getBIzq()-1; j<Tetris.getTetrimino().getBDer()+2; j++) {
@@ -126,5 +136,7 @@ public class GUI extends JFrame {
 			}
 		}
 	}
+	
+
 	
 }

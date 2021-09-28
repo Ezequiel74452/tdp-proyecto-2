@@ -74,26 +74,36 @@ public abstract class Tetrimino {
 	
 		int i =0;
 		int xbAux, ybAux,xb,yb,xbRotacion,ybRotacion;
+		int aux;
 		
 		int[][] MatrizRotada;
 		
 		MatrizRotada = new int[4][2];
 		
+		xt=bloques[2].getX();
+		yt=bloques[2].getY();
+		
 		for (i=0; i<4; i++) {
 				xb=bloques[i].getX();
 				yb=bloques[i].getY();
 				
-				xbAux=xt-xb; 
-				if (xbAux >= 0) xbAux++; 
+				xbAux=xb-xt; 
+				//if (xbAux <= 0) xbAux--; 
 				
-				ybAux=yt-yb; 
-				if(ybAux >= 0) ybAux++;
+				ybAux=yb-yt; 
+				//if(ybAux >= 0) ybAux++;
+				aux=ybAux;
+				ybAux=-xbAux;
+				xbAux=aux;
 				
-				xbRotacion = xb + xbAux;
-				ybRotacion = yb + ybAux;
+				xbRotacion = xt + xbAux;
+				ybRotacion = yt + ybAux;
 				
 				MatrizRotada[i][0]=xbRotacion;
 				MatrizRotada[i][1]=ybRotacion;
+				
+				System.out.println(xbRotacion);
+				System.out.println(ybRotacion);
 				}
 		
 		if (i == 4)
