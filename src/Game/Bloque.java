@@ -6,20 +6,16 @@ public class Bloque {
 	
 	private String[] imagenes;
 	private ImageIcon textura;
-	private boolean hayBloque;
-	private boolean recienPuesto;
+	private boolean sobre;
 	private int x, y;
 	
-	public Bloque(int posArr, boolean hay) {
-		hayBloque = hay;
+	public Bloque(int posArr) {
 		imagenes = new String[] {"/Texturas/Gris.png", "/Texturas/Empty.png", "/Texturas/Rojo.png", "/Texturas/Verde.png", "/Texturas/Azul.png", "/Texturas/Amarillo.png", "/Texturas/Violeta.png", "/Texturas/Celeste.png", "/Texturas/Naranja.png"};
-		if (hayBloque) {
-			textura = new ImageIcon(getClass().getResource(imagenes[posArr]));
-			if (posArr != 0 && posArr !=1 ) {
-				recienPuesto = true;
-			}
+		textura = new ImageIcon(getClass().getResource(imagenes[posArr]));
+		if (posArr == 0) {
+			sobre = false;
 		} else {
-			textura = new ImageIcon(getClass().getResource(imagenes[1]));
+			sobre = true;
 		}
 		
 	}
@@ -28,16 +24,12 @@ public class Bloque {
 		return textura;
 	}
 	
-	public boolean hayBloque() {
-		return hayBloque;
+	public boolean esSobre() {
+		return sobre;
 	}
 	
-	public boolean getRecienPuesto() {
-		return recienPuesto;
-	}
-	
-	public void setRecienPuesto(boolean rp) {
-		recienPuesto = rp;
+	public void setSobre(boolean rp) {
+		sobre = rp;
 	}
 	
 	public void setX(int xx) {

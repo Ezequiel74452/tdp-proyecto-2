@@ -15,7 +15,4 @@ public class Forma3 extends Tetrimino {
 		setCubo(bloques[2], 0, 3);
 		setCubo(bloques[3], 1, 3);
 	}
-
-	
-
 }

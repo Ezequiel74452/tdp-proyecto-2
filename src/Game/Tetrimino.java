@@ -11,10 +11,10 @@ public abstract class Tetrimino {
 	
 	public Tetrimino(int rndm) {
 		grilla = new Bloque[4][4];
-		Bloque cubo1 = new Bloque(rndm, true);
-		Bloque cubo2 = new Bloque(rndm, true);
-		Bloque cubo3 = new Bloque(rndm, true);
-		Bloque cubo4 = new Bloque(rndm, true);
+		Bloque cubo1 = new Bloque(rndm);
+		Bloque cubo2 = new Bloque(rndm);
+		Bloque cubo3 = new Bloque(rndm);
+		Bloque cubo4 = new Bloque(rndm);
 		bloques = new Bloque[] {cubo1, cubo2, cubo3, cubo4};
 	}
 	
@@ -49,12 +49,25 @@ public abstract class Tetrimino {
 	public void setCubo(Bloque b, int f, int c) {
 		grilla[f][c] = b;
 	}
-	public void moverIzquierda() {
+	/*public void moverIzquierda() {
+		if(checkMove()) {
+			for(int i=0; i<bloques.length; i++) {
+				bloques[i].setY(bloques[i].getY()-1);
+			}
+			actualizar();
+		}
+	}
+	private boolean checkmove() {
 		
 	}
 	public void moverDerecha() {
-		
-	}
+		if(checkMove()) {
+			for(int i=0; i<bloques.length; i++) {
+				bloques[i].setY(bloques[i].getY()+1);
+			}
+			actualizar();
+		}
+	}*/
 	
 	
 	public int[][] rotar() {
@@ -110,5 +123,41 @@ public abstract class Tetrimino {
 	
 	public void setYt(int y) {
 		yt=y;
+	}
+	public int getAltMax() {
+		int max = bloques[0].getX();
+		for(int i=1; i<4; i++) {
+			if(bloques[i].getX()<max) {
+				max = bloques[i].getX();
+			}
+		}
+		return max;
+	}
+	public int getAltMin() {
+		int min = bloques[0].getX();
+		for(int i=1; i<4; i++) {
+			if(bloques[i].getX()>min) {
+				min = bloques[i].getX();
+			}
+		}
+		return min;
+	}
+	public int getBIzq() {
+		int izq = bloques[0].getY();
+		for(int i=1; i<4; i++) {
+			if(bloques[i].getY()<izq) {
+				izq = bloques[i].getY();
+			}
+		}
+		return izq;
+	}
+	public int getBDer() {
+		int der = bloques[0].getY();
+		for(int i=1; i<4; i++) {
+			if(bloques[i].getY()>der) {
+				der = bloques[i].getY();
+			}
+		}
+		return der;
 	}
 }
