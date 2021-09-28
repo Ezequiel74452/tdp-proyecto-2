@@ -20,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.tools.javac.Main;
+
 import Game.Bloque;
 import Game.Juego;
 import exceptions.ImposibleRotar;
@@ -32,6 +34,12 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.awt.Color;
 
 public class GUI extends JFrame {
@@ -77,6 +85,17 @@ public class GUI extends JFrame {
 						
 					}
 				});
+				Clip clip;
+				try {
+					clip = AudioSystem.getClip();
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+							getClass().getResourceAsStream("/Images/Music.wav"));
+						    clip.open(inputStream);
+						    clip.start();
+				} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
+					e1.printStackTrace();
+				}
+			    
 			} });
 	}
 	/**
@@ -137,6 +156,6 @@ public class GUI extends JFrame {
 		}
 	}
 	
-
+	
 	
 }
