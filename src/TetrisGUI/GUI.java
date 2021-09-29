@@ -1,48 +1,32 @@
 package TetrisGUI;
 
 import java.awt.Dimension;
-
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.sun.tools.javac.Main;
-
-import Game.Bloque;
-import Game.Juego;
-import exceptions.ImposibleRotar;
-
 import java.awt.GridLayout;
 import java.awt.Image;
-
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import java.awt.Color;
+import Game.Juego;
+import exceptions.ImposibleRotar;
 
+@SuppressWarnings("serial")
 public class GUI extends JFrame {
 
 	private static JPanel contentPane;
@@ -67,13 +51,10 @@ public class GUI extends JFrame {
 						char c = e.getKeyChar();
 						if(c == 'a') {
 							Tetris.mover(1);
-							actualizar();
 						} else if (c == 'd') {
 							Tetris.mover(0);
-							actualizar();
 						} else if (c == 's') {
 							Tetris.descender();
-						    actualizar();
 						} else if (c == 'q') {
 							try {
 								Tetris.rotar();
@@ -154,7 +135,6 @@ public class GUI extends JFrame {
 		t.schedule(new TimerTask() {
 		    public void run() {
 		       Tetris.descender();
-		       actualizar();
 		    }
 		}, 0, 1000);
 	}

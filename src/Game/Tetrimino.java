@@ -1,7 +1,5 @@
 package Game;
 
-import exceptions.ImposibleRotar;
-
 public abstract class Tetrimino {
 	
 	protected Bloque[][] grilla;
