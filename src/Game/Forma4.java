@@ -15,4 +15,20 @@ public class Forma4 extends Tetrimino {
 		setCubo(bloques[2], 1, 1);
 		setCubo(bloques[3], 1, 2);
 	}
+	
+public int[][] rotar(){
+		
+		int[][] MatrizRotada;
+		
+		MatrizRotada = new int[4][2];
+		
+		for(int i=0;i<4;i++)
+		{
+			MatrizRotada[i][0] = this.bloques[i].getX();
+			MatrizRotada[i][1] = this.bloques[i].getY();
+		}
+				
+		return MatrizRotada;
+		
+	}
 }

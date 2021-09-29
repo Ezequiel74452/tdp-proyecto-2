@@ -388,7 +388,7 @@ public class Juego {
 		
 		boolean solapado=false;
 		
-		if (!grilla[x][y].esSobre() )
+		if ((x<0) || (x>22) || y<0 || y>11 || (!grilla[x][y].esSobre()))
 		solapado = true;
 		
 		return solapado;

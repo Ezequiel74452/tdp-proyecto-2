@@ -159,13 +159,29 @@ public class GUI extends JFrame {
 		}, 0, 1000);
 	}
 	
-	public static void actualizar() {
+	/*public static void actualizar() {
 		for(int i=Tetris.getTetrimino().getAltMax()-1; i<=Tetris.getTetrimino().getAltMin(); i++) {
 			for(int j=Tetris.getTetrimino().getBIzq()-1; j<Tetris.getTetrimino().getBDer()+2; j++) {
 				casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
 			}
 		}
-	}
+	}*/
+	
+	public static void actualizar() {
+        int iArriba=Tetris.getTetrimino().getAltMax()-2;
+        if(iArriba<0)
+            iArriba=0;
+
+        int iAbajo =Tetris.getTetrimino().getAltMin()+2;
+        if(iAbajo>22)
+            iAbajo=22;
+
+        for(int i=iArriba; i<=iAbajo; i++) {
+            for(int j=0; j<12; j++) {
+                casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
+            }
+        }
+    }
 	
 	public static void actualizarTodo() {
 		for(int i=1; i<23; i++) {
