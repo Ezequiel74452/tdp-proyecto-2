@@ -342,10 +342,40 @@ public class Juego {
 		
 		boolean solapado = false;
 		int [][] matrizRotada;
-		int i=0;
+		int i,j;
 		
 		matrizRotada = tactual.rotar();
+		boolean desplazar = false;
 		
+		int min=matrizRotada[0][1];
+		int max=matrizRotada[0][1];;
+		
+		for( j=0;j<4;j++)
+		{
+			if (matrizRotada[j][1]<min)
+				min=matrizRotada[j][1];
+			if (matrizRotada[j][1]>max)
+				max=matrizRotada[j][1];
+		}
+		
+		if(min==0)
+			for(j=0;j<4;j++) {
+				matrizRotada[j][1]+=1;	
+			}
+		if(min==-1)
+			for(j=0;j<4;j++) {
+				matrizRotada[j][1]+=2;	
+			}
+		if(max==11)
+			for(j=0;j<4;j++) {
+				matrizRotada[j][1]-=1;	
+			}
+		if(max==12)
+			for(j=0;j<4;j++) {
+				matrizRotada[j][1]-=2;	
+			}
+				
+		i=0;
 		while(!solapado && (i<4) ) {
 			
 			solapado = Solapa(matrizRotada[i][0],matrizRotada[i][1]);
