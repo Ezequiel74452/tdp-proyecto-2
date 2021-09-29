@@ -1,14 +1,6 @@
 package Game;
 
-import java.awt.Image;
-import java.awt.event.KeyEvent;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import TetrisGUI.GUI;
 import exceptions.ImposibleRotar;
 
@@ -193,6 +185,7 @@ public class Juego {
 				tactual.getBloque(j).setY(y-1);
 				//grilla[x][y] = aux;
 			}
+			GUI.actualizar();
 		}
 	}
 	private void moverDer() {
@@ -216,6 +209,7 @@ public class Juego {
 				tactual.getBloque(j).setY(y+1);
 				//grilla[x][y] = aux;
 			}
+			GUI.actualizar();
 		}
 	}
 	
@@ -300,6 +294,7 @@ public class Juego {
 				tactual.getBloque(i).setX(x+1);
 				//grilla[x][y] = aux;
 			}
+			GUI.actualizar();
 		} else {
 			for(int i=0; i<4; i++) {
 				tactual.getBloque(i).setSobre(false);
@@ -307,27 +302,20 @@ public class Juego {
 				int y = tactual.getBloque(i).getY();
 				grilla[x][y].setSobre(false);
 			}
-			int max = tactual.getAltMax();
-			int min = tactual.getAltMin();
-			System.out.println("Máximo: "+max+". Mínimo: "+min);
-			limpiarLineas(min, max);
+			checkLineas(tactual.getAltMin(), tactual.getAltMax());
 			tactual = tsiguiente;
 			tsiguiente = crearSiguiente();
 			setTetrimino(tactual);
 		}
 	}
-	public void limpiarLineas(int min, int max) {
-		System.out.println("Entramos a limpiarLineas");
+	public void checkLineas(int min, int max) {
 		boolean seLimpia = true;
 		for(int i=max; i<=min; i++) {
-			System.out.println("Primer for");
 			for(int j=1; j<11 && seLimpia; j++) {
-				System.out.println("Segundo for");
 				if(grilla[i][j].esSobre()) {
 					seLimpia = false;
 				}
 			}
-			System.out.println("SeLimpia: "+seLimpia);
 			if (seLimpia) {
 				limpiar(i);
 				bajarBloques(i);
@@ -336,14 +324,12 @@ public class Juego {
 		}
 	}
 	private void limpiar(int linea) {
-		System.out.println("Entra a limpiar");
 		for(int i=1; i<11; i++) {
 			grilla[linea][i] = new Bloque(1);
 		}
 		GUI.actualizarLinea(linea);
 	}
 	private void bajarBloques(int l) {
-		System.out.println("Entro a bajar bloques");
 		for(int j=l; j>1; j--) {
 			for(int i=1; i<11; i++) {
 				grilla[j][i] = grilla[j-1][i];
@@ -365,10 +351,7 @@ public class Juego {
 			i++;			
 		}
 		
-		if (solapado)
-			throw new ImposibleRotar("error: El tetrimino no puede rotar en esa posición");
-		else
-			{
+		if (!solapado) {
 			for( i=0;i<4;i++) {
 				Bloque empty = new Bloque(1);
 				grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()]=empty;
@@ -381,7 +364,7 @@ public class Juego {
 				grilla[matrizRotada[i][0]][matrizRotada[i][1]]=tactual.getBloque(i);
 			}
 			
-			}
+		}
 	} 
 	
 	 private boolean Solapa(int x, int y) {
