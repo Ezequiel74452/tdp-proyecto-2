@@ -1,10 +1,10 @@
 package Game;
 
-public class Forma7 extends Tetrimino {
+public class L_Tetrimino extends Tetrimino {
 
-	//"S" invertida
+	//"L" invertida,
 	
-	public Forma7(int rndm) {
+	public L_Tetrimino(int rndm) {
 		super(rndm);
 		acomodarCubos();
 	}
@@ -12,8 +12,8 @@ public class Forma7 extends Tetrimino {
 	protected void acomodarCubos() {
 		setCubo(bloques[0], 0, 1);
 		setCubo(bloques[1], 0, 2);
-		setCubo(bloques[2], 1, 2);
+		setCubo(bloques[2], 0, 3);
 		setCubo(bloques[3], 1, 3);
-		ejeDeRotacion = 2;
+		ejeDeRotacion = 1;
 	}
 }

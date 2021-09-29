@@ -1,10 +1,10 @@
 package Game;
 
-public class Forma5 extends Tetrimino {
+public class I_Tetrimino extends Tetrimino {
 	
 	//"I".
 	
-	public Forma5(int rndm) {
+	public I_Tetrimino(int rndm) {
 		super(rndm);
 		acomodarCubos();
 	}

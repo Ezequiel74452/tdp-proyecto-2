@@ -50,25 +50,25 @@ public class Juego {
 		Random ran2 = new Random();
 		int col = ran2.nextInt(7)+2;
 		switch (num) {
-		case 0: tactual= new Forma1(col);
+		case 0: tactual= new T_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
-		case 1: tactual= new Forma2(col);
+		case 1: tactual= new J_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
-		case 2: tactual= new Forma3(col);
+		case 2: tactual= new L_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
-		case 3: tactual= new Forma4(col);
+		case 3: tactual= new O_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
-		case 4: tactual= new Forma5(col);
+		case 4: tactual= new I_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
-		case 5: tactual= new Forma6(col);
+		case 5: tactual= new S_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
-		case 6: tactual= new Forma7(col);
+		case 6: tactual= new Z_Tetrimino(col);
 		setTetrimino(tactual);
 		break;
 		}
@@ -80,19 +80,19 @@ public class Juego {
 		Random ran2 = new Random();
 		int col = ran2.nextInt(7)+2;
 		switch (num) {
-		case 0: tsiguiente= new Forma1(col);
+		case 0: tsiguiente= new T_Tetrimino(col);
 		break;
-		case 1: tsiguiente= new Forma2(col);
+		case 1: tsiguiente= new J_Tetrimino(col);
 		break;
-		case 2: tsiguiente= new Forma3(col);
+		case 2: tsiguiente= new L_Tetrimino(col);
 		break;
-		case 3: tsiguiente= new Forma4(col);
+		case 3: tsiguiente= new O_Tetrimino(col);
 		break;
-		case 4: tsiguiente= new Forma5(col);
+		case 4: tsiguiente= new I_Tetrimino(col);
 		break;
-		case 5: tsiguiente= new Forma6(col);
+		case 5: tsiguiente= new S_Tetrimino(col);
 		break;
-		case 6: tsiguiente= new Forma7(col);
+		case 6: tsiguiente= new Z_Tetrimino(col);
 		break;
 		}
 		return tsiguiente;
@@ -348,7 +348,7 @@ public class Juego {
 		boolean desplazar = false;
 		
 		int min=matrizRotada[0][1];
-		int max=matrizRotada[0][1];;
+		int max=matrizRotada[0][1];
 		
 		for( j=0;j<4;j++)
 		{
