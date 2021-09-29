@@ -6,8 +6,7 @@ public abstract class Tetrimino {
 	
 	protected Bloque[][] grilla;
 	protected Bloque[] bloques;
-	protected int xt;
-	protected int yt;
+	protected int ejeDeRotacion;
 	
 	public Tetrimino(int rndm) {
 		grilla = new Bloque[4][4];
@@ -75,13 +74,15 @@ public abstract class Tetrimino {
         int i =0;
         int xbAux, ybAux,xb,yb,xbRotacion,ybRotacion;
         int aux;
+        
+        int xt,yt;
 
         int[][] MatrizRotada;
 
         MatrizRotada = new int[4][2];
 
-        xt=bloques[2].getX();
-        yt=bloques[2].getY();
+        xt=bloques[ejeDeRotacion].getX();
+        yt=bloques[ejeDeRotacion].getY();
 
         for (i=0; i<4; i++) {
                 xb=bloques[i].getX();
@@ -113,21 +114,7 @@ public abstract class Tetrimino {
 		return bloques[pos];
 	}
 	
-	public int getXt() {
-		return xt;
-	}
 	
-	public int getYt() {
-		return yt;
-	}
-	
-	public void setXt(int x) {
-		xt=x;
-	}
-	
-	public void setYt(int y) {
-		yt=y;
-	}
 	public int getAltMax() {
 		int max = bloques[0].getX();
 		for(int i=1; i<4; i++) {

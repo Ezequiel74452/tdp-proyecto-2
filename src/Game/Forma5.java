@@ -14,5 +14,6 @@ public class Forma5 extends Tetrimino {
 		setCubo(bloques[1], 0, 1);
 		setCubo(bloques[2], 0, 2);
 		setCubo(bloques[3], 0, 3);
+		ejeDeRotacion = 2;
 	}
 }
