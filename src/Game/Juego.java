@@ -1,6 +1,7 @@
 package Game;
 
 import java.util.Random;
+
 import TetrisGUI.GUI;
 import exceptions.ImposibleRotar;
 
