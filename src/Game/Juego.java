@@ -16,16 +16,15 @@ public class Juego {
 	
 	protected Bloque[][] grilla;
 	private int puntos;
-	private Tetrimino tactual;
+	private Tetrimino tactual, tsiguiente;
 	
 	public Juego() {
 		grilla = new Bloque[23][12];
 		crearPerimetro();
 		crearGrillaInicial();
 		puntos = 0;
-		tactual = null;
-		
-		
+		tactual = crearTetrimino();
+		tsiguiente = crearSiguiente();
 	}
 	
 	
@@ -52,41 +51,65 @@ public class Juego {
 		}
 	}
 	
-	public void crearTetrimino() {
+	public Tetrimino crearTetrimino() {
 		Random ran = new Random();
 		int num = ran.nextInt(7);
 		Random ran2 = new Random();
 		int col = ran2.nextInt(7)+2;
 		switch (num) {
 		case 0: tactual= new Forma1(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		case 1: tactual= new Forma2(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		case 2: tactual= new Forma3(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		case 3: tactual= new Forma4(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		case 4: tactual= new Forma5(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		case 5: tactual= new Forma6(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		case 6: tactual= new Forma7(col);
-		setTetrimino();
+		setTetrimino(tactual);
 		break;
 		}
+		return tactual;
+	}
+	public Tetrimino crearSiguiente() {
+		Random ran = new Random();
+		int num = ran.nextInt(7);
+		Random ran2 = new Random();
+		int col = ran2.nextInt(7)+2;
+		switch (num) {
+		case 0: tsiguiente= new Forma1(col);
+		break;
+		case 1: tsiguiente= new Forma2(col);
+		break;
+		case 2: tsiguiente= new Forma3(col);
+		break;
+		case 3: tsiguiente= new Forma4(col);
+		break;
+		case 4: tsiguiente= new Forma5(col);
+		break;
+		case 5: tsiguiente= new Forma6(col);
+		break;
+		case 6: tsiguiente= new Forma7(col);
+		break;
+		}
+		return tsiguiente;
 	}
 	
-	private void setTetrimino() {
+	private void setTetrimino(Tetrimino tr) {
 		for(int i=1; i<3; i++) {
 			for(int j=4; j<8; j++) {
-				if (tactual!=null && tactual.getBloquePos(i-1, j-4)!=null) {
-					setBloque(tactual.getBloquePos(i-1, j-4), i, j);
+				if (tr!=null && tr.getBloquePos(i-1, j-4)!=null) {
+					setBloque(tr.getBloquePos(i-1, j-4), i, j);
 					grilla[i][j].setX(i);
 					grilla[i][j].setY(j);
 				}
@@ -235,6 +258,7 @@ public class Juego {
 	public Tetrimino getTetrimino() {
 		return tactual;
 	}
+
 	
 	/*public void descender() {
 		boolean sePuede = true;
@@ -269,7 +293,6 @@ public class Juego {
 			}
 			
 			for(int i=3; i>=0; i--) {
-				
 				int x = tactual.getBloque(i).getX();
 				int y = tactual.getBloque(i).getY();
 				//Bloque aux = grilla[x+1][y];
@@ -277,7 +300,56 @@ public class Juego {
 				tactual.getBloque(i).setX(x+1);
 				//grilla[x][y] = aux;
 			}
+		} else {
+			for(int i=0; i<4; i++) {
+				tactual.getBloque(i).setSobre(false);
+				int x = tactual.getBloque(i).getX();
+				int y = tactual.getBloque(i).getY();
+				grilla[x][y].setSobre(false);
+			}
+			int max = tactual.getAltMax();
+			int min = tactual.getAltMin();
+			System.out.println("Máximo: "+max+". Mínimo: "+min);
+			limpiarLineas(min, max);
+			tactual = tsiguiente;
+			tsiguiente = crearSiguiente();
+			setTetrimino(tactual);
 		}
+	}
+	public void limpiarLineas(int min, int max) {
+		System.out.println("Entramos a limpiarLineas");
+		boolean seLimpia = true;
+		for(int i=max; i<=min; i++) {
+			System.out.println("Primer for");
+			for(int j=1; j<11 && seLimpia; j++) {
+				System.out.println("Segundo for");
+				if(grilla[i][j].esSobre()) {
+					seLimpia = false;
+				}
+			}
+			System.out.println("SeLimpia: "+seLimpia);
+			if (seLimpia) {
+				limpiar(i);
+				bajarBloques(i);
+			}
+			seLimpia = true;
+		}
+	}
+	private void limpiar(int linea) {
+		System.out.println("Entra a limpiar");
+		for(int i=1; i<11; i++) {
+			grilla[linea][i] = new Bloque(1);
+		}
+		GUI.actualizarLinea(linea);
+	}
+	private void bajarBloques(int l) {
+		System.out.println("Entro a bajar bloques");
+		for(int j=l; j>1; j--) {
+			for(int i=1; i<11; i++) {
+				grilla[j][i] = grilla[j-1][i];
+			}
+		}
+		GUI.actualizarTodo();
 	}
 	public void rotar() throws ImposibleRotar {
 		

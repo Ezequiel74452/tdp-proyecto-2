@@ -71,6 +71,9 @@ public class GUI extends JFrame {
 						} else if (c == 'd') {
 							Tetris.mover(0);
 							actualizar();
+						} else if (c == 's') {
+							Tetris.descender();
+						    actualizar();
 						} else if (c == 'q') {
 							try {
 								Tetris.rotar();
@@ -133,7 +136,6 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		
 		Tetris = new Juego();
-		Tetris.crearTetrimino();
 		casillas = new JLabel[23][12];
 		for(int i=0; i<23; i++) {
 			for(int j=0; j<12; j++) {
@@ -165,6 +167,18 @@ public class GUI extends JFrame {
 		}
 	}
 	
+	public static void actualizarTodo() {
+		for(int i=1; i<23; i++) {
+			for(int j=1; j<12; j++) {
+				casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
+			}
+		}
+	}
 	
+	public static void actualizarLinea(int l) {
+		for(int i=1; i<12; i++) {
+			casillas[l][i].setIcon(new ImageIcon(Tetris.obtenerBloque(l, i).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
+		}
+	}
 	
 }
