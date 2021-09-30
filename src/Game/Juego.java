@@ -12,6 +12,7 @@ public class Juego {
 	protected Bloque[][] grilla;
 	private int puntos;
 	private Tetrimino tactual, tsiguiente;
+	private boolean GameOver;
 	
 	public Juego() {
 		grilla = new Bloque[23][12];
@@ -20,6 +21,11 @@ public class Juego {
 		puntos = 0;
 		tactual = crearTetrimino();
 		tsiguiente = crearSiguiente();
+		GameOver=false;
+		
+		
+		
+		
 		
 	
 	}
@@ -278,6 +284,7 @@ public class Juego {
 		}
 	}*/
 	
+	
 	public void descender() {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
@@ -419,6 +426,12 @@ public class Juego {
 		
 		return solapado;
 		
+	}
+
+
+	public boolean getGameOver() {
+		
+		return GameOver;
 	} 
 	
 	

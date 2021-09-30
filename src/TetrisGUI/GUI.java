@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Game.Juego;
+import Game.Reloj;
 import exceptions.ImposibleRotar;
 
 @SuppressWarnings("serial")
@@ -36,14 +37,30 @@ public class GUI extends JFrame {
 	private static double width;
 	private static Juego Tetris;
 	private static JLabel[][] casillas;
+	private int tiempo=0;
+	private int aceleracion=1000;
+	Reloj r;
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		Tetris = new Juego();
+		Reloj r = new Reloj(Tetris);
+		Thread d = new Thread(r);
+		d.start();
+		
+				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				GUI frame = new GUI();
+				frame.setFocusable(true);
 				frame.setVisible(true);
+				
+				
+				
 				frame.addKeyListener(new KeyListener() {
 					public void keyTyped(KeyEvent e) {
 						
@@ -118,7 +135,7 @@ public class GUI extends JFrame {
 		contentPane.setBounds(0, 0, getWidth(), getHeight());
 		setContentPane(contentPane);
 		
-		Tetris = new Juego();
+		
 		casillas = new JLabel[23][12];
 		for(int i=0; i<23; i++) {
 			for(int j=0; j<12; j++) {
@@ -133,12 +150,17 @@ public class GUI extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/images/icon.png")));
 		setTitle("Tetris");
 		
-		Timer t = new Timer();
+		
+		
+		/*Timer t = new Timer();
 		t.schedule(new TimerTask() {
-		    public void run() {
-		       Tetris.descender();
+		    public void run() {	    	
+		       Tetris.descender();	       
 		    }
-		}, 0, 1000);
+		}, 0, aceleracion);*/
+		
+		
+		
 	}
 	
 	/*public static void actualizar() {
