@@ -1,6 +1,8 @@
 package Game;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import TetrisGUI.GUI;
 import exceptions.ImposibleRotar;
@@ -10,6 +12,7 @@ public class Juego {
 	protected Bloque[][] grilla;
 	private int puntos;
 	private Tetrimino tactual, tsiguiente;
+	private boolean GameOver;
 	
 	public Juego() {
 		grilla = new Bloque[23][12];
@@ -18,6 +21,13 @@ public class Juego {
 		puntos = 0;
 		tactual = crearTetrimino();
 		tsiguiente = crearSiguiente();
+		GameOver=false;
+		
+		
+		
+		
+		
+	
 	}
 	
 	
@@ -274,6 +284,7 @@ public class Juego {
 		}
 	}*/
 	
+	
 	public void descender() {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
@@ -310,6 +321,7 @@ public class Juego {
 		}
 	}
 	public void checkLineas(int min, int max) {
+		int cant=0;
 		boolean seLimpia = true;
 		for(int i=max; i<=min; i++) {
 			for(int j=1; j<11 && seLimpia; j++) {
@@ -320,9 +332,16 @@ public class Juego {
 			if (seLimpia) {
 				limpiar(i);
 				bajarBloques(i);
+				cant++;
 			}
 			seLimpia = true;
 		}
+		switch(cant){
+		case 1: puntos += 100;break;
+		case 2: puntos += 200;break;
+		case 3: puntos += 500;break;
+		case 4: puntos += 800;}
+		
 	}
 	private void limpiar(int linea) {
 		for(int i=1; i<11; i++) {
@@ -345,7 +364,7 @@ public class Juego {
 		int i,j;
 		
 		matrizRotada = tactual.rotar();
-		boolean desplazar = false;
+		
 		
 		int min=matrizRotada[0][1];
 		int max=matrizRotada[0][1];
@@ -407,24 +426,15 @@ public class Juego {
 		
 		return solapado;
 		
+	}
+
+
+	public boolean getGameOver() {
+		
+		return GameOver;
 	} 
 	
-	/* public void keyPressed(KeyEvent e) {
-
-
-        int keycode = e.getKeyCode();
-
-       
-        try {
-			switch (keycode) {
-
-			    case KeyEvent.VK_Z -> rotar();
-      
-			}
-		} catch (ImposibleRotar e1) {
-			System.out.println(e1.getMessage());
-		}
-    } */
+	
 	
 	
 }
