@@ -132,14 +132,12 @@ public class GUI extends JFrame {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/images/icon.png")));
 		setTitle("Tetris");
-		
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {
 		    public void run() {
 		       Tetris.descender();
 		    }
-		}, 0, 1000);
-	}
+		}, 0, 500);}
 	
 	/*public static void actualizar() {
 		for(int i=Tetris.getTetrimino().getAltMax()-1; i<=Tetris.getTetrimino().getAltMin(); i++) {

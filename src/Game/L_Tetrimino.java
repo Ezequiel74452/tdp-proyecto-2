@@ -1,5 +1,7 @@
 package Game;
 
+import javax.swing.ImageIcon;
+
 public class L_Tetrimino extends Tetrimino {
 
 	//"L" invertida,
@@ -7,6 +9,8 @@ public class L_Tetrimino extends Tetrimino {
 	public L_Tetrimino(int rndm) {
 		super(rndm);
 		acomodarCubos();
+		figuras = new String[] {"/Texturas/Tetriminos/L/L_rojo.png","/Texturas/Tetriminos/L/L_verde.png","/Texturas/Tetriminos/L/L_azul.png","/Texturas/Tetriminos/L/L_amarillo.png","/Texturas/Tetriminos/L/L_violeta.png","/Texturas/Tetriminos/L/L_celeste.png","/Texturas/Tetriminos/L/L_naranja.png"};
+		imagen = new ImageIcon(getClass().getResource(figuras[rndm-2]));
 	}
 	
 	protected void acomodarCubos() {

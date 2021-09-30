@@ -10,7 +10,7 @@ public class Bloque {
 	private int x, y;
 	
 	public Bloque(int posArr) {
-		imagenes = new String[] {"/Texturas/Gris.png", "/Texturas/Empty.png", "/Texturas/Rojo.png", "/Texturas/Verde.png", "/Texturas/Azul.png", "/Texturas/Amarillo.png", "/Texturas/Violeta.png", "/Texturas/Celeste.png", "/Texturas/Naranja.png"};
+		imagenes = new String[] {"/Texturas/Bloques/Gris.png", "/Texturas/Bloques/Empty.png", "/Texturas/Bloques/Rojo.png", "/Texturas/Bloques/Verde.png", "/Texturas/Bloques/Azul.png", "/Texturas/Bloques/Amarillo.png", "/Texturas/Bloques/Violeta.png", "/Texturas/Bloques/Celeste.png", "/Texturas/Bloques/Naranja.png"};
 		textura = new ImageIcon(getClass().getResource(imagenes[posArr]));
 		if (posArr == 0) {
 			sobre = false;

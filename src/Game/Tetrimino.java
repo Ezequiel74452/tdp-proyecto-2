@@ -1,10 +1,14 @@
 package Game;
 
+import javax.swing.ImageIcon;
+
 public abstract class Tetrimino {
 	
 	protected Bloque[][] grilla;
 	protected Bloque[] bloques;
 	protected int ejeDeRotacion;
+	protected ImageIcon imagen;
+	protected String figuras[];
 	
 	public Tetrimino(int rndm) {
 		grilla = new Bloque[4][4];

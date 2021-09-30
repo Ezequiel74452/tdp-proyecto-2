@@ -1,5 +1,7 @@
 package Game;
 
+import javax.swing.ImageIcon;
+
 public class O_Tetrimino extends Tetrimino {
 
 	//"Cuadrado".
@@ -7,6 +9,8 @@ public class O_Tetrimino extends Tetrimino {
 	public O_Tetrimino(int rndm) {
 		super(rndm);
 		acomodarCubos();
+		figuras = new String[] {"/Texturas/Tetriminos/Cuadrado/Cuadrado_rojo.png","/Texturas/Tetriminos/Cuadrado/Cuadrado_verde.png","/Texturas/Tetriminos/Cuadrado/Cuadrado_azul.png","/Texturas/Tetriminos/Cuadrado/Cuadrado_amarillo.png","/Texturas/Tetriminos/Cuadrado/Cuadrado_violeta.png","/Texturas/Tetriminos/Cuadrado/Cuadrado_celeste.png","/Texturas/Tetriminos/Cuadrado/Cuadrado_naranja.png"};
+		imagen = new ImageIcon(getClass().getResource(figuras[rndm-2]));
 	}
 	
 	protected void acomodarCubos() {
@@ -15,6 +19,7 @@ public class O_Tetrimino extends Tetrimino {
 		setCubo(bloques[2], 1, 1);
 		setCubo(bloques[3], 1, 2);
 		ejeDeRotacion = 2;
+		
 	}
 	
 public int[][] rotar(){
