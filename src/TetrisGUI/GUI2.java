@@ -42,9 +42,7 @@ public class GUI2 {
 	private static Reloj r = new Reloj(Tetris);
 	private static JLabel Time = new JLabel("Tiempo:");
 	private static JLabel lblNewLabel_3 = new JLabel("");
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -96,17 +94,9 @@ public class GUI2 {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
 	public GUI2() {
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		
 		frame = new JFrame();
@@ -135,7 +125,6 @@ public class GUI2 {
 				casillas[i][j] = new JLabel();
 				casillas[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
-				//lblNewLabel.setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance(29, 29, Image.SCALE_DEFAULT)));
 				panel.add(casillas[i][j]);
 			}
 		}
