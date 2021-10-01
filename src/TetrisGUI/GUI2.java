@@ -132,18 +132,22 @@ public class GUI2 {
 		frame.setTitle("Tetris");
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.BLACK);
 		splitPane.setRightComponent(panel_1);
 		
 		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		Image im = Tetris.getSiguiente().getImagen().getImage().getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imic = new ImageIcon(im);
+		Prox.setForeground(Color.WHITE);
 		Prox.setIcon(imic);
 		
 		JLabel lblNewLabel_1 = new JLabel("Pr\u00F3ximo tetrimino:");
+		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblNewLabel = new JLabel("Puntaje:");
+		lblNewLabel.setForeground(Color.WHITE);
 		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -170,6 +174,9 @@ public class GUI2 {
 								.addComponent(Time))))
 					.addContainerGap(498, Short.MAX_VALUE))
 		);
+		Puntuación.setForeground(Color.WHITE);
+		lblNewLabel_3.setForeground(Color.WHITE);
+		Time.setForeground(Color.WHITE);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
