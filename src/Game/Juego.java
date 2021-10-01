@@ -2,7 +2,7 @@ package Game;
 
 import java.util.Random;
 import TetrisGUI.GUI;
-import exceptions.ImposibleRotar;
+
 
 public class Juego {
 	
@@ -10,6 +10,10 @@ public class Juego {
 	private int puntos;
 	private Tetrimino tactual, tsiguiente;
 	private boolean GameOver;
+	public static final int MoverI = 1;
+	public static final int MoverD = 2;
+	public static final  int MoverA = 3;
+	public static final  int Rotar = 4;
 	
 	public Juego() {
 		grilla = new Bloque[23][12];
@@ -19,12 +23,17 @@ public class Juego {
 		tactual = crearTetrimino();
 		tsiguiente = crearSiguiente();
 		GameOver=false;
-		
-		
-		
-		
-		
+			
+	}
 	
+	public synchronized void operarJuego(int operacion) {
+		switch (operacion) {
+		case MoverI: {moverIzq();break;}
+		case MoverD: {moverDer();break;}
+		case MoverA: {descender();break;}
+		case Rotar: {rotar();break;}
+	}
+		
 	}
 	
 	
@@ -106,8 +115,9 @@ public class Juego {
 	}
 	
 	private void setTetrimino(Tetrimino tr) {
-		for(int i=1; i<3 ; i++) {
-			for(int j=4; j<8 ; j++) {
+		
+		for(int i=1; i<3; i++) {
+			for(int j=4; j<8; j++) {
 				if (tr!=null && tr.getBloquePos(i-1, j-4)!=null) {
 					
 					if(!grilla[i][j].esSobre())
@@ -265,7 +275,7 @@ public class Juego {
 		}
 		GUI.actualizarTodo();
 	}
-	public void rotar() throws ImposibleRotar {
+	public void rotar(){
 		
 		boolean solapado = false;
 		int [][] matrizRotada;

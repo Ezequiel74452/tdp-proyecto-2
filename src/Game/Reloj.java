@@ -24,13 +24,12 @@ public class Reloj implements Runnable {
 			try {
 				Thread.sleep((long)aceleracion);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			tiempo += ((double)aceleracion/1000);
 			System.out.println(tiempo);
 			System.out.println(aceleracion);
-			if(aceleracion>200)
+			if(aceleracion>300)
 				aceleracion= aceleracion+ (-1)* Math.log(tiempo);
 			this.Tet.descender();
 			

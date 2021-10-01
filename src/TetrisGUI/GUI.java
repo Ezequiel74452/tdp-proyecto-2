@@ -2,22 +2,11 @@ package TetrisGUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,8 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Game.Juego;
-import Game.Reloj;
-import exceptions.ImposibleRotar;
+
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
@@ -36,78 +24,15 @@ public class GUI extends JFrame {
 	private static double height;
 	private static double width;
 	private static Juego Tetris;
+	
 	private static JLabel[][] casillas;
-	private static Reloj r;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		Tetris = new Juego();
-		r = new Reloj(Tetris);
-		Thread d= new Thread(r);
-		d.start();
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				GUI frame = new GUI();
-				frame.setVisible(true);
-				
-				frame.addKeyListener(new KeyListener() {
-					public void keyTyped(KeyEvent e) {
-						
-					}
-
-					public void keyPressed(KeyEvent e) {
-						char c = e.getKeyChar();
-						if(c == 'a' && !Tetris.getGameOver()) {
-							Tetris.mover(1);
-						} else if (c == 'd' && !Tetris.getGameOver()) {
-							Tetris.mover(0);
-						} else if (c == 's' && !Tetris.getGameOver()) {
-							Tetris.descender();
-						} else if (c == 'q' && !Tetris.getGameOver()) {
-							try {
-								Tetris.rotar();
-								actualizar();
-							} catch (ImposibleRotar e1) {
-								System.out.println(e1.getMessage());
-							}
-							
-						} 
-					}
-
-					public void keyReleased(KeyEvent e) {
-						
-					}
-				});
-				try {
-					Clip clip;
-					Random ran = new Random();
-					clip = AudioSystem.getClip();
-					AudioInputStream inputStream;
-					if (ran.nextInt(1000) == 622) {
-						inputStream = AudioSystem.getAudioInputStream(
-								getClass().getResourceAsStream("/Sonidos/GiornosTheme.wav"));
-					    clip.open(inputStream);
-					} else {
-						inputStream = AudioSystem.getAudioInputStream(
-								getClass().getResourceAsStream("/Sonidos/Music.wav"));
-							    clip.open(inputStream);
-					}
-						    clip.start();
-				} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
-					e1.printStackTrace();
-				}
-			    
-			} });
-	}
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	/**
-	 * 
-	 */
-	public GUI() {
+	public GUI(Juego t) {
+		Tetris= t;
 		setForeground(Color.WHITE);
 		height = Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30;
 		width = (height/23)*12;
