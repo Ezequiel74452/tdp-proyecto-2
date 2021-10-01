@@ -1,9 +1,6 @@
 package Game;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import TetrisGUI.GUI;
 import exceptions.ImposibleRotar;
 
@@ -109,62 +106,23 @@ public class Juego {
 	}
 	
 	private void setTetrimino(Tetrimino tr) {
-		for(int i=1; i<3; i++) {
-			for(int j=4; j<8; j++) {
+		for(int i=1; i<3 ; i++) {
+			for(int j=4; j<8 ; j++) {
 				if (tr!=null && tr.getBloquePos(i-1, j-4)!=null) {
-					setBloque(tr.getBloquePos(i-1, j-4), i, j);
+					
+					if(!grilla[i][j].esSobre())
+						GameOver=true;
+																	
+					setBloque(tr.getBloquePos(i-1, j-4), i, j);					
 					grilla[i][j].setX(i);
 					grilla[i][j].setY(j);
+					
 				}
+				
 			}
 		}
 	}
 	
-	/*public void mover(int pos) {
-		if (pos==0) {
-			moverDer();
-		} else {
-			moverIzq();
-		}
-		
-	}
-	
-	private void moverIzq() {
-		boolean sePuede = true;
-		for (int i=0; i<4 && sePuede; i++) {
-			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].esSobre())) {
-				sePuede = false;
-			}
-		}
-		if (sePuede) {
-			for (int j=0; j<4; j++) {
-				int x = tactual.getBloque(j).getX();
-				int y = tactual.getBloque(j).getY();
-				Bloque aux = grilla[x][y-1];
-				grilla[x][y-1] = tactual.getBloque(j);
-				tactual.getBloque(j).setY(y-1);
-				grilla[x][y] = aux;
-			}
-		}
-	}
-	private void moverDer() {
-		boolean sePuede = true;
-		for (int i=0; i<4 && sePuede; i++) {
-			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()+1].esSobre())) {
-				sePuede = false;
-			}
-		}
-		if (sePuede) {
-			for (int j=3; j>=0; j--) {
-				int x = tactual.getBloque(j).getX();
-				int y = tactual.getBloque(j).getY();
-				Bloque aux = grilla[x][y+1];
-				grilla[x][y+1] = tactual.getBloque(j);
-				tactual.getBloque(j).setY(y+1);
-				grilla[x][y] = aux;
-			}
-		}
-	}*/
 	
 	public void mover(int pos) {
 		if (pos==0) {
@@ -191,10 +149,8 @@ public class Juego {
 			for (int j=0; j<4; j++) {
 				int x = tactual.getBloque(j).getX();
 				int y = tactual.getBloque(j).getY();
-				//Bloque aux = grilla[x][y-1];
 				grilla[x][y-1] = tactual.getBloque(j);
-				tactual.getBloque(j).setY(y-1);
-				//grilla[x][y] = aux;
+				tactual.getBloque(j).setY(y-1);			
 			}
 			GUI.actualizar();
 		}
@@ -215,38 +171,13 @@ public class Juego {
 			for (int j=3; j>=0; j--) {
 				int x = tactual.getBloque(j).getX();
 				int y = tactual.getBloque(j).getY();
-				//Bloque aux = grilla[x][y+1];
 				grilla[x][y+1] = tactual.getBloque(j);
 				tactual.getBloque(j).setY(y+1);
-				//grilla[x][y] = aux;
 			}
 			GUI.actualizar();
 		}
 	}
 	
-	
-	/* public void moverIzq() {
-		int cont=0;
-		for(int i=1; i<21 && cont<4; i++) {
-			for (int j=1; j<11; j++) {
-				if(obtenerBloque(i, j).getRecienPuesto() && !obtenerBloque(i, j-1).hayBloque()) {
-					cont++;
-				}
-			}
-		}
-		if (cont==4) {
-			for(int i=1; i<21 && cont>0; i++) {
-				for (int j=1; j<11; j++) {
-					if(obtenerBloque(i, j).getRecienPuesto() && !obtenerBloque(i, j-1).hayBloque()) {
-						cont--;
-						Bloque bAux = grilla[i][j-1];
-						grilla[i][j-1] = obtenerBloque(i, j);
-						grilla[i][j] = bAux;
-					}
-				}
-			}
-		}
-	} */
 	
 	public int getPuntos() {
 		return puntos;
@@ -263,28 +194,7 @@ public class Juego {
 	public Tetrimino getTetrimino() {
 		return tactual;
 	}
-
-	
-	/*public void descender() {
-		boolean sePuede = true;
-		for (int i=0; i<4 && sePuede; i++) {
-			if(!(grilla[tactual.getBloque(i).getX()+1][tactual.getBloque(i).getY()].esSobre())) {
-				sePuede = false;
-			}
-		}
-		if(sePuede) {
-			for(int i=3; i>=0; i--) {
-				int x = tactual.getBloque(i).getX();
-				int y = tactual.getBloque(i).getY();
-				Bloque aux = grilla[x+1][y];
-				grilla[x+1][y] = tactual.getBloque(i);
-				tactual.getBloque(i).setX(x+1);
-				grilla[x][y] = aux;
-			}
-		}
-	}*/
-	
-	
+		
 	public void descender() {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
@@ -301,10 +211,8 @@ public class Juego {
 			for(int i=3; i>=0; i--) {
 				int x = tactual.getBloque(i).getX();
 				int y = tactual.getBloque(i).getY();
-				//Bloque aux = grilla[x+1][y];
 				grilla[x+1][y] = tactual.getBloque(i);
 				tactual.getBloque(i).setX(x+1);
-				//grilla[x][y] = aux;
 			}
 			GUI.actualizar();
 		} else {

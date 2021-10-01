@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Game.Juego;
+import Game.Reloj;
 import exceptions.ImposibleRotar;
 
 @SuppressWarnings("serial")
@@ -36,14 +37,21 @@ public class GUI extends JFrame {
 	private static double width;
 	private static Juego Tetris;
 	private static JLabel[][] casillas;
+	private static Reloj r;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		Tetris = new Juego();
+		r = new Reloj(Tetris);
+		Thread d= new Thread(r);
+		d.start();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				GUI frame = new GUI();
 				frame.setVisible(true);
+				
 				frame.addKeyListener(new KeyListener() {
 					public void keyTyped(KeyEvent e) {
 						
@@ -51,13 +59,13 @@ public class GUI extends JFrame {
 
 					public void keyPressed(KeyEvent e) {
 						char c = e.getKeyChar();
-						if(c == 'a') {
+						if(c == 'a' && !Tetris.getGameOver()) {
 							Tetris.mover(1);
-						} else if (c == 'd') {
+						} else if (c == 'd' && !Tetris.getGameOver()) {
 							Tetris.mover(0);
-						} else if (c == 's') {
+						} else if (c == 's' && !Tetris.getGameOver()) {
 							Tetris.descender();
-						} else if (c == 'q') {
+						} else if (c == 'q' && !Tetris.getGameOver()) {
 							try {
 								Tetris.rotar();
 								actualizar();
@@ -105,8 +113,6 @@ public class GUI extends JFrame {
 		width = (height/23)*12;
 		Dimension test = new Dimension(383, (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30);
 		test.setSize(width, height);
-		//Dimension test = new Dimension(383, 735);
-		//setExtendedState(6); FullScreen
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(test);
@@ -118,34 +124,22 @@ public class GUI extends JFrame {
 		contentPane.setBounds(0, 0, getWidth(), getHeight());
 		setContentPane(contentPane);
 		
-		Tetris = new Juego();
+		
 		casillas = new JLabel[23][12];
 		for(int i=0; i<23; i++) {
 			for(int j=0; j<12; j++) {
 				casillas[i][j] = new JLabel();
 				casillas[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
-				//lblNewLabel.setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance(29, 29, Image.SCALE_DEFAULT)));
 				contentPane.add(casillas[i][j]);
 			}
 		}
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/images/icon.png")));
 		setTitle("Tetris");
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		    public void run() {
-		       Tetris.descender();
-		    }
-		}, 0, 500);}
-	
-	/*public static void actualizar() {
-		for(int i=Tetris.getTetrimino().getAltMax()-1; i<=Tetris.getTetrimino().getAltMin(); i++) {
-			for(int j=Tetris.getTetrimino().getBIzq()-1; j<Tetris.getTetrimino().getBDer()+2; j++) {
-				casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
-			}
+		
 		}
-	}*/
+	
 	
 	public static void actualizar() {
         int iArriba=Tetris.getTetrimino().getAltMax()-2;
