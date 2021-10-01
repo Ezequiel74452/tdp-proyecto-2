@@ -7,9 +7,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -25,6 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Game.Juego;
+import Game.Reloj;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -34,12 +33,15 @@ public class GUI2 {
 	private JFrame frame;
 	private static double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight()-30;
 	private static double width = (height/23)*12;
-	private Dimension test = new Dimension((int)width+300, (int) height);
-	private static Juego Tetris;
+	private Dimension test = new Dimension((int)width+200, (int) height);
+	private static Juego Tetris = new Juego();
 	private static JLabel[][] casillas;
 	private JPanel panel = new JPanel();
 	private static JLabel Prox = new JLabel("");
 	private static JLabel Puntuación = new JLabel("0");
+	private static Reloj r = new Reloj(Tetris);
+	private static JLabel Time = new JLabel("Tiempo:");
+	private static JLabel lblNewLabel_3 = new JLabel("");
 	/**
 	 * Launch the application.
 	 */
@@ -89,6 +91,8 @@ public class GUI2 {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				Thread d= new Thread(r);
+                d.start();
 			}
 		});
 	}
@@ -125,7 +129,6 @@ public class GUI2 {
 		panel.setBounds(0, 0, (int) width, (int) height);
 		panel.setPreferredSize(new Dimension((int) width-50, (int) height));
 		
-		Tetris = new Juego();
 		casillas = new JLabel[23][12];
 		for(int i=0; i<23; i++) {
 			for(int j=0; j<12; j++) {
@@ -142,6 +145,8 @@ public class GUI2 {
 		JPanel panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
 		
+		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 		Image im = Tetris.getSiguiente().getImagen().getImage().getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imic = new ImageIcon(im);
 		Prox.setIcon(imic);
@@ -155,43 +160,45 @@ public class GUI2 {
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(109)
-							.addComponent(lblNewLabel_1))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(92)
+							.addGap(18)
 							.addComponent(Prox))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(126)
+							.addGap(38)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_1)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(35)
+									.addComponent(Puntuación))))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(60)
 							.addComponent(lblNewLabel))
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(Puntuación)
-							.addGap(65)))
-					.addContainerGap(440, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(61)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addComponent(Time))))
+					.addContainerGap(498, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel)
-					.addGap(52)
+					.addGap(18)
 					.addComponent(Puntuación)
-					.addGap(72)
+					.addGap(32)
 					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(18)
 					.addComponent(Prox)
-					.addContainerGap(394, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(Time)
+					.addGap(32)
+					.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 12, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(392, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
-		
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		    public void run() {
-		       Tetris.descender();
-		    }
-		}, 0, 500);
 	}
 	
 	public static void actualizar() {
@@ -241,5 +248,9 @@ public class GUI2 {
 	
 	public static void actualizarPuntuación() {
 		Puntuación.setText(Integer.toString(Tetris.getPuntos()));
+	}
+	
+	public static void actualizarTiempo() {
+		lblNewLabel_3.setText(Integer.toString(r.getTiempo()));
 	}
 }
