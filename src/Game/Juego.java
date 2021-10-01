@@ -1,7 +1,8 @@
 package Game;
 
 import java.util.Random;
-import TetrisGUI.GUI;
+
+import TetrisGUI.GUI2;
 
 
 public class Juego {
@@ -133,6 +134,55 @@ public class Juego {
 		}
 	}
 	
+	public Tetrimino getSiguiente() {
+		return tsiguiente;
+	}
+	
+	/*public void mover(int pos) {
+		if (pos==0) {
+			moverDer();
+		} else {
+			moverIzq();
+		}
+		
+	}
+	
+	private void moverIzq() {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].esSobre())) {
+				sePuede = false;
+			}
+		}
+		if (sePuede) {
+			for (int j=0; j<4; j++) {
+				int x = tactual.getBloque(j).getX();
+				int y = tactual.getBloque(j).getY();
+				Bloque aux = grilla[x][y-1];
+				grilla[x][y-1] = tactual.getBloque(j);
+				tactual.getBloque(j).setY(y-1);
+				grilla[x][y] = aux;
+			}
+		}
+	}
+	private void moverDer() {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()+1].esSobre())) {
+				sePuede = false;
+			}
+		}
+		if (sePuede) {
+			for (int j=3; j>=0; j--) {
+				int x = tactual.getBloque(j).getX();
+				int y = tactual.getBloque(j).getY();
+				Bloque aux = grilla[x][y+1];
+				grilla[x][y+1] = tactual.getBloque(j);
+				tactual.getBloque(j).setY(y+1);
+				grilla[x][y] = aux;
+			}
+		}
+	}*/
 	
 	public void mover(int pos) {
 		if (pos==0) {
@@ -162,7 +212,7 @@ public class Juego {
 				grilla[x][y-1] = tactual.getBloque(j);
 				tactual.getBloque(j).setY(y-1);			
 			}
-			GUI.actualizar();
+			GUI2.actualizar();
 		}
 	}
 	private void moverDer() {
@@ -184,7 +234,7 @@ public class Juego {
 				grilla[x][y+1] = tactual.getBloque(j);
 				tactual.getBloque(j).setY(y+1);
 			}
-			GUI.actualizar();
+			GUI2.actualizar();
 		}
 	}
 	
@@ -224,7 +274,7 @@ public class Juego {
 				grilla[x+1][y] = tactual.getBloque(i);
 				tactual.getBloque(i).setX(x+1);
 			}
-			GUI.actualizar();
+			GUI2.actualizar();
 		} else {
 			for(int i=0; i<4; i++) {
 				tactual.getBloque(i).setSobre(false);
@@ -236,6 +286,7 @@ public class Juego {
 			tactual = tsiguiente;
 			tsiguiente = crearSiguiente();
 			setTetrimino(tactual);
+			GUI2.actualizarNext();
 		}
 	}
 	public void checkLineas(int min, int max) {
@@ -259,13 +310,14 @@ public class Juego {
 		case 2: puntos += 200;break;
 		case 3: puntos += 500;break;
 		case 4: puntos += 800;}
+		GUI2.actualizarPuntuación();
 		
 	}
 	private void limpiar(int linea) {
 		for(int i=1; i<11; i++) {
 			grilla[linea][i] = new Bloque(1);
 		}
-		GUI.actualizarLinea(linea);
+		GUI2.actualizarLinea(linea);
 	}
 	private void bajarBloques(int l) {
 		for(int j=l; j>1; j--) {
@@ -273,7 +325,7 @@ public class Juego {
 				grilla[j][i] = grilla[j-1][i];
 			}
 		}
-		GUI.actualizarTodo();
+		GUI2.actualizarTodo();
 	}
 	public void rotar(){
 		

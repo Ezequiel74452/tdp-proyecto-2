@@ -108,4 +108,7 @@ public abstract class Tetrimino {
 		}
 		return der;
 	}
+	public ImageIcon getImagen() {
+		return imagen;
+	}
 }
