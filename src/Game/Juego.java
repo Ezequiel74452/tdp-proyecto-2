@@ -138,52 +138,6 @@ public class Juego {
 		return tsiguiente;
 	}
 	
-	/*public void mover(int pos) {
-		if (pos==0) {
-			moverDer();
-		} else {
-			moverIzq();
-		}
-		
-	}
-	
-	private void moverIzq() {
-		boolean sePuede = true;
-		for (int i=0; i<4 && sePuede; i++) {
-			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].esSobre())) {
-				sePuede = false;
-			}
-		}
-		if (sePuede) {
-			for (int j=0; j<4; j++) {
-				int x = tactual.getBloque(j).getX();
-				int y = tactual.getBloque(j).getY();
-				Bloque aux = grilla[x][y-1];
-				grilla[x][y-1] = tactual.getBloque(j);
-				tactual.getBloque(j).setY(y-1);
-				grilla[x][y] = aux;
-			}
-		}
-	}
-	private void moverDer() {
-		boolean sePuede = true;
-		for (int i=0; i<4 && sePuede; i++) {
-			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()+1].esSobre())) {
-				sePuede = false;
-			}
-		}
-		if (sePuede) {
-			for (int j=3; j>=0; j--) {
-				int x = tactual.getBloque(j).getX();
-				int y = tactual.getBloque(j).getY();
-				Bloque aux = grilla[x][y+1];
-				grilla[x][y+1] = tactual.getBloque(j);
-				tactual.getBloque(j).setY(y+1);
-				grilla[x][y] = aux;
-			}
-		}
-	}*/
-	
 	public void mover(int pos) {
 		if (pos==0) {
 			moverDer();
