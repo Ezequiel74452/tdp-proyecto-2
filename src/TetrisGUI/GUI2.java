@@ -57,13 +57,13 @@ public class GUI2 {
 						public void keyPressed(KeyEvent e) {
 							char c = e.getKeyChar();
 							if(c == 'a') {
-								Tetris.mover(1);
+								Tetris.operarJuego(1);
 							} else if (c == 'd') {
-								Tetris.mover(0);
+								Tetris.operarJuego(2);
 							} else if (c == 's') {
-								Tetris.descender();
+								Tetris.operarJuego(3);
 							} else if (c == 'q') {
-								Tetris.rotar();
+								Tetris.operarJuego(4);
 								actualizar();
 							} 
 						}
