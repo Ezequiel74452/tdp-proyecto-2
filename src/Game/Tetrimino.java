@@ -9,6 +9,7 @@ public abstract class Tetrimino {
 	protected int ejeDeRotacion;
 	protected ImageIcon imagen;
 	protected String figuras[];
+	protected boolean puedeRotar;
 	
 	public Tetrimino(int rndm) {
 		grilla = new Bloque[4][4];
@@ -25,7 +26,89 @@ public abstract class Tetrimino {
 		grilla[f][c] = b;
 	}
 	
+	public void rotar(Bloque[][] grilla2) {
+		
+		int desplazar=0;
+		int xt=bloques[ejeDeRotacion].getX();
+		int yt=bloques[ejeDeRotacion].getY();
+		
+			//en caso de que al rotar, choque contra la pared izquierda, moveremos la pieza a la derecha
+		  if(getAltMin()-xt==1 && yt == 1)
+	        	desplazar ++;	
+	        else if(getAltMin()-xt==2 && yt == 1)
+	        	desplazar =desplazar+2;
+	        else if(getAltMin()-xt==2 && yt == 2)
+	        	desplazar =desplazar+1;
+	      
+	        //en caso de que al rotar, choque contra la pared derecha, moveremos la pieza a la izquierda
+	       
+	        if(xt-getAltMax()==1 && yt == 10)
+	        	desplazar --;
+	        else if(xt-getAltMax()==2 && yt == 10)
+	        	desplazar =desplazar -2;
+	        else if(xt-getAltMax()==2 && yt == 9)
+	        	desplazar = desplazar -1;
+	           	 
+	        puedeRotar=true;
+	        
+	        rotarRecursivo(grilla2,0,desplazar);
+			
+	}
 	
+	private void rotarRecursivo(Bloque[][] grilla2,int i,int desplazar) {
+		
+		if(!puedeRotar || i==4  )
+			return;
+		else
+		{
+		
+        int xbAux, ybAux,xb,yb,xbRotacion,ybRotacion;
+        int aux,xt,yt;
+        
+        xt=bloques[ejeDeRotacion].getX();
+        yt=bloques[ejeDeRotacion].getY();
+        
+        xb=bloques[i].getX();
+        yb=bloques[i].getY();
+
+        xbAux=xb-xt; 
+        ybAux=yb-yt; 
+
+        aux=ybAux;
+        ybAux=-xbAux;
+        xbAux=aux;
+        
+        xbRotacion = xt + xbAux;
+        ybRotacion = yt + ybAux+desplazar;
+        
+        if(solapa(grilla2,xbRotacion,ybRotacion)==false)
+        	puedeRotar=false;
+        
+        rotarRecursivo(grilla2,i+1,desplazar);
+        
+        if(puedeRotar)
+        {	
+        	
+        	grilla2[xb][yb]=new Bloque(1);
+        	grilla2[xbRotacion][ybRotacion]=bloques[i];
+        	bloques[i].setX(xbRotacion);
+        	bloques[i].setY(ybRotacion);
+        
+        }
+        	    
+		}
+	}
+	
+	private boolean solapa(Bloque[][] grilla2, int xbRotacion, int ybRotacion) {
+		
+		if(xbRotacion<1 || xbRotacion>22 || 
+		( (ybRotacion>0 && ybRotacion<11) && !grilla2[xbRotacion][ybRotacion].esSobre() ))
+			return false;
+		else 
+			return true;
+	}
+
+	/*
 	public int[][] rotar() {
 
         int i =0;
@@ -46,7 +129,6 @@ public abstract class Tetrimino {
                 yb=bloques[i].getY();
 
                 xbAux=xb-xt; 
-
                 ybAux=yb-yt; 
 
                 aux=ybAux;
@@ -63,6 +145,7 @@ public abstract class Tetrimino {
 
         return MatrizRotada;
     }
+		*/
 	
 	public Bloque getBloquePos(int f, int c) {
 		return grilla[f][c];
@@ -70,7 +153,7 @@ public abstract class Tetrimino {
 	public Bloque getBloque(int pos) {
 		return bloques[pos];
 	}
-	
+
 	
 	public int getAltMax() {
 		int max = bloques[0].getX();

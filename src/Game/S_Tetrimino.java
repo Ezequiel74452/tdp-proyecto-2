@@ -18,6 +18,6 @@ public class S_Tetrimino extends Tetrimino {
 		setCubo(bloques[1], 0, 3);
 		setCubo(bloques[2], 1, 1);
 		setCubo(bloques[3], 1, 2);
-		ejeDeRotacion = 3;
+		ejeDeRotacion = 0;
 	}
 }

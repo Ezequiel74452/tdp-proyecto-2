@@ -118,14 +118,16 @@ public class Juego {
 	
 	private void setTetrimino(Tetrimino tr) {
 		
-		for(int i=1; i<3 && !GameOver; i++) {
-			for(int j=4; j<8 && !GameOver; j++) {
+		for(int i=1; i<3; i++) {
+			for(int j=4; j<8 ; j++) {
 				if (tr!=null && tr.getBloquePos(i-1, j-4)!=null) {
 					
 					if(!grilla[i][j].esSobre())
 					{
 						GameOver=true;
-						GUI2.gameOver();
+						GUI2.actualizar();
+						GUI2.gameOver();	
+						break;
 					}												
 					setBloque(tr.getBloquePos(i-1, j-4), i, j);					
 					grilla[i][j].setX(i);
@@ -134,7 +136,10 @@ public class Juego {
 				}
 				
 			}
+			if(GameOver)
+				break;
 		}
+	
 	}
 	
 	public Tetrimino getSiguiente() {
@@ -166,6 +171,7 @@ public class Juego {
 			tactual = tsiguiente;
 			tsiguiente = crearSiguiente();
 			setTetrimino(tactual);
+			GUI2.actualizar();
 			GUI2.actualizarNext();
 			}
 		}
@@ -226,9 +232,17 @@ public class Juego {
 			for(int i=1; i<11; i++) {
 				grilla[j][i] = grilla[j-1][i];
 			}
+			GUI2.actualizarLinea(j);
 		}
-		GUI2.actualizarTodo();
 	}
+	
+	public void rotar() {
+	   
+		tactual.rotar(grilla);
+		GUI2.actualizar();
+	}
+	
+	/*
 	public void rotar(){
 		
 		boolean solapado = false;
@@ -299,14 +313,11 @@ public class Juego {
 		return solapado;
 		
 	}
-
+	*/
 
 	public boolean getGameOver() {
 		
 		return GameOver;
 	} 
-	
-	
-	
 	
 }

@@ -22,9 +22,9 @@ public class O_Tetrimino extends Tetrimino {
 		
 	}
 	
-public int[][] rotar(){
+public void rotar(Bloque[][] grilla2){
 		
-		int[][] MatrizRotada;
+		/*int[][] MatrizRotada;
 		
 		MatrizRotada = new int[4][2];
 		
@@ -35,6 +35,6 @@ public int[][] rotar(){
 		}
 				
 		return MatrizRotada;
-		
+		*/
 	}
 }

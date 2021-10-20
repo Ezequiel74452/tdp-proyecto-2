@@ -14,10 +14,12 @@ public class T_Tetrimino extends Tetrimino {
 	}
 	
 	protected void acomodarCubos() {
-		setCubo(bloques[0], 0, 2);
-		setCubo(bloques[1], 1, 1);
-		setCubo(bloques[2], 1, 2);
-		setCubo(bloques[3], 1, 3);
-		ejeDeRotacion = 2;
+		setCubo(bloques[0], 0, 0);
+		setCubo(bloques[1], 0, 1);
+		setCubo(bloques[2], 0, 2);
+		setCubo(bloques[3], 1, 1);
+		ejeDeRotacion = 3;
 	}
+	
+	
 }

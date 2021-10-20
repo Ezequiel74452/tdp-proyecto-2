@@ -65,7 +65,7 @@ public class GUI2 {
 								Tetris.operarJuego(3);
 							} else if (c == 'q') {
 								Tetris.operarJuego(4);
-								actualizar();
+
 							} 
 						}
 
@@ -223,13 +223,7 @@ public class GUI2 {
         }
     }
 	
-	public static void actualizarTodo() {
-		for(int i=1; i<23; i++) {
-			for(int j=1; j<12; j++) {
-				casillas[i][j].setIcon(new ImageIcon(Tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12)-2, (int) (height/23)-3, Image.SCALE_DEFAULT)));
-			}
-		}
-	}
+
 	
 	public static void actualizarLinea(int l) {
 		for(int i=1; i<12; i++) {
