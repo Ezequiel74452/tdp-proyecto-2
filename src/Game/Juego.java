@@ -138,16 +138,7 @@ public class Juego {
 		return tsiguiente;
 	}
 	
-	public void mover(int pos) {
-		if (pos==0) {
-			moverDer();
-		} else {
-			moverIzq();
-		}
-		
-	}
-	
-	private void moverIzq() {
+	/*private void moverIzq() {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
 			if(!(grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()-1].esSobre())) {
@@ -191,7 +182,38 @@ public class Juego {
 			GUI2.actualizar();
 		}
 	}
+	*/
 	
+	private void moverIzq() {
+		tactual.mover(grilla,-1,0);
+		GUI2.actualizar();
+	}
+	
+	private void moverDer() {
+		tactual.mover(grilla,1,0);
+		GUI2.actualizar();
+	}
+	
+	private void descender() {
+		if(tactual.mover(grilla, 0, 1))
+		{
+			for(int i=0; i<4; i++) {
+				tactual.getBloque(i).setSobre(false);
+				int x = tactual.getBloque(i).getX();
+				int y = tactual.getBloque(i).getY();
+				grilla[x][y].setSobre(false);
+			}
+			checkLineas(tactual.getAltMin(), tactual.getAltMax());
+			tactual = tsiguiente;
+			tsiguiente = crearSiguiente();
+			setTetrimino(tactual);
+			GUI2.actualizarNext();
+		}
+		else
+			GUI2.actualizar();
+		
+			
+	}
 	
 	public int getPuntos() {
 		return puntos;
@@ -208,7 +230,8 @@ public class Juego {
 	public Tetrimino getTetrimino() {
 		return tactual;
 	}
-		
+	
+	/*
 	public void descender() {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
@@ -243,6 +266,9 @@ public class Juego {
 			GUI2.actualizarNext();
 		}
 	}
+	
+	*/
+	
 	public void checkLineas(int min, int max) {
 		int cant=0;
 		boolean seLimpia = true;

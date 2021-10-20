@@ -111,4 +111,34 @@ public abstract class Tetrimino {
 	public ImageIcon getImagen() {
 		return imagen;
 	}
+
+
+	public boolean mover(Bloque[][] grilla2,int direccionH,int direccionV ) {
+		boolean sePuede = true;
+		for (int i=0; i<4 && sePuede; i++) {
+			if(!(grilla2[bloques[i].getX()+direccionV][bloques[i].getY()+direccionH].esSobre())) {
+				sePuede = false;
+			}
+		}
+		if (sePuede) {
+			for(int i=0;i<4;i++) {
+				Bloque empty = new Bloque(1);
+				grilla2[bloques[i].getX()][bloques[i].getY()]=empty;
+				}
+			
+			for (int j=0; j<4; j++) {
+				int x = bloques[j].getX();
+				int y =bloques[j].getY();
+				grilla2[x+direccionV][y+direccionH] = bloques[j];
+				bloques[j].setY(y+direccionH);	
+				bloques[j].setX(x+direccionV);
+				}
+						
+			}
+			if (!sePuede && direccionV>0 )
+				return true;
+			else
+				return false;
+	}
+	
 }

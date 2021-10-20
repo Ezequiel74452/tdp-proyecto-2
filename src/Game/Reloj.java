@@ -28,7 +28,7 @@ public class Reloj implements Runnable {
 			tiempo += ((double)aceleracion/1000);
 			if(aceleracion>300)
 				aceleracion= aceleracion+ (-1)* Math.log(tiempo);
-			this.Tet.descender();
+			this.Tet.operarJuego(3);
 			GUI2.actualizarTiempo();
 		}
 	}
