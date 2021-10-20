@@ -13,6 +13,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -248,5 +249,8 @@ public class GUI2 {
 	
 	public static void actualizarTiempo() {
 		lblNewLabel_3.setText(Integer.toString(r.getTiempo()));
+	}
+	public static void gameOver() {
+		JOptionPane.showMessageDialog(null, "Game Over");
 	}
 }
