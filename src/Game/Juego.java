@@ -15,6 +15,7 @@ public class Juego {
 	public static final int MoverD = 2;
 	public static final  int MoverA = 3;
 	public static final  int Rotar = 4;
+	private int alturaMax=21;
 	
 	public Juego() {
 		grilla = new Bloque[23][12];
@@ -158,7 +159,9 @@ public class Juego {
 	
 	private void descender() {
 		if(tactual.mover(grilla, 0, 1))
-		{
+		{	
+			if(tactual.getAltMax()<alturaMax)
+			alturaMax=tactual.getAltMax();
 			for(int i=0; i<4; i++) {
 				tactual.getBloque(i).setSobre(false);
 				int x = tactual.getBloque(i).getX();
@@ -227,8 +230,10 @@ public class Juego {
 		}
 		GUI2.actualizarLinea(linea);
 	}
-	private void bajarBloques(int l) {
-		for(int j=l; j>1; j--) {
+	
+	private void bajarBloques(int l)
+	{
+		for(int j=l; j>=alturaMax; j--) {
 			for(int i=1; i<11; i++) {
 				grilla[j][i] = grilla[j-1][i];
 			}
