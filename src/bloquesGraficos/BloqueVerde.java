@@ -1,4 +1,4 @@
-package Game;
+package bloquesGraficos;
 
 //Textura verde del bloque
 public class BloqueVerde extends BloqueGrafico{
