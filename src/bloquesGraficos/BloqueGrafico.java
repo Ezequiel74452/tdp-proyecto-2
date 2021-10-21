@@ -1,4 +1,4 @@
-package Game;
+package bloquesGraficos;
 
 import javax.swing.ImageIcon;
 

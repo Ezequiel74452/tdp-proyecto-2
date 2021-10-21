@@ -1,4 +1,4 @@
-package Game;
+package bloquesGraficos;
 
 //Textura del bloque perimetro (gris)
 public class BloquePerimetro extends BloqueGrafico{

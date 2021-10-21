@@ -1,4 +1,4 @@
-package Game;
+package bloquesGraficos;
 
 //Textura celeste del bloque
 public class BloqueCeleste extends BloqueGrafico{

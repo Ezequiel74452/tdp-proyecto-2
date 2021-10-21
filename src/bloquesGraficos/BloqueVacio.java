@@ -1,4 +1,4 @@
-package Game;
+package bloquesGraficos;
 
 //Textura del bloque vacio (negro)
 public class BloqueVacio extends BloqueGrafico{
