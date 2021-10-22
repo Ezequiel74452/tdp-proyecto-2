@@ -159,7 +159,7 @@ public class Juego {
 	}
 	
 	private void moverDer() {
-		tactual.mover(grilla,1,0);
+		tactual.moverDer(grilla,1,0);
 		GUI2.actualizar();
 	}
 	
