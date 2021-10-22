@@ -4,7 +4,7 @@ import bloquesGraficos.BloqueGrafico;
 import bloquesGraficos.BloqueRojo;
 
 public class S_Tetrimino extends Tetrimino {
-	//"J"
+	//"S"
 		public S_Tetrimino(Bloque w, Bloque x, Bloque y, Bloque z, int rotacion, Grilla grilla) {
 			super(w, x, y, z, rotacion, grilla);
 		}
@@ -127,7 +127,6 @@ public class S_Tetrimino extends Tetrimino {
 					swap(y, derechaY);
 					derechaW = grilla.getBloque(w.getX(), w.getY()+1);
 					swap(w, derechaW);
-
 				}
 			}
 		}

@@ -4,7 +4,7 @@ import bloquesGraficos.BloqueGrafico;
 import bloquesGraficos.BloqueVerde;
 
 public class L_Tetrimino extends Tetrimino {
-	//"J"
+	//"L"
 	public L_Tetrimino(Bloque w, Bloque x, Bloque y, Bloque z, int rotacion, Grilla grilla) {
 		super(w, x, y, z, rotacion, grilla);
 	}
