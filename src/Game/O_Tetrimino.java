@@ -47,12 +47,12 @@ public class O_Tetrimino extends Tetrimino {
 		Bloque derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
 		
 		if(derechaX.ocupado() == false && derechaZ.ocupado() == false){
-			swap(x,grilla.getBloque(w.getX(), w.getY()+1));
-			swap(z,grilla.getBloque(w.getX(), w.getY()+1));
+			swap(x, derechaX);
+			swap(z, derechaZ);
 			Bloque derechaW = grilla.getBloque(w.getX(), w.getY()+1);
 			Bloque derechaY = grilla.getBloque(y.getX(), y.getY()+1);
-			swap(w,grilla.getBloque(w.getX(), w.getY()+1));
-			swap(y,grilla.getBloque(w.getX(), w.getY()+1));
+			swap(w, derechaW);
+			swap(y, derechaY);
 		}
 					
 	}

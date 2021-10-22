@@ -159,8 +159,7 @@ public class Juego {
 	}
 	
 	private void moverDer() {
-		tactual.moverDer(grilla,1,0);
-		GUI2.actualizar();
+		tactual.moverDer();
 	}
 	
 	private void descender() {
