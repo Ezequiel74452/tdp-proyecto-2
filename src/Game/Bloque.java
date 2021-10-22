@@ -2,34 +2,43 @@ package Game;
 
 import javax.swing.ImageIcon;
 
+import bloquesGraficos.BloqueGrafico;
+
 public class Bloque {
 	
-	private String[] imagenes;
-	private ImageIcon textura;
-	private boolean sobre;
+	private Grilla miGrilla;
+	private BloqueGrafico miRepresentacion;
+	private boolean ocupado;
 	private int x, y;
 	
-	public Bloque(int posArr) {
-		imagenes = new String[] {"/Texturas/Bloques/Gris.png", "/Texturas/Bloques/Empty.png", "/Texturas/Bloques/Rojo.png", "/Texturas/Bloques/Verde.png", "/Texturas/Bloques/Azul.png", "/Texturas/Bloques/Amarillo.png", "/Texturas/Bloques/Violeta.png", "/Texturas/Bloques/Celeste.png", "/Texturas/Bloques/Naranja.png"};
-		textura = new ImageIcon(getClass().getResource(imagenes[posArr]));
-		if (posArr == 0) {
-			sobre = false;
-		} else {
-			sobre = true;
-		}
+	public Bloque(int x, int y,boolean l, Grilla g,BloqueGrafico bg) {
+		ocupado = l;
+		this.x=x;
+		this.y=y;
+		miGrilla=g;
+		miRepresentacion=bg;
+		miGrilla.bloqueCambioEstado(x, y, miRepresentacion.getTextura());
+	}
+	
+	public void ocupar(BloqueGrafico t) {
+		miRepresentacion=t;
+		ocupado = true;
+		miGrilla.bloqueCambioEstado(x, y, miRepresentacion.getTextura());
 		
 	}
 
-	public ImageIcon getTextura() {
-		return textura;
+	public void desOcupar(BloqueGrafico t) {
+		miRepresentacion=t;
+		ocupado = false;
+		miGrilla.bloqueCambioEstado(x, y, miRepresentacion.getTextura());
 	}
 	
-	public boolean esSobre() {
-		return sobre;
+	public BloqueGrafico getTextura() {
+		return miRepresentacion;
 	}
 	
-	public void setSobre(boolean rp) {
-		sobre = rp;
+	public boolean ocupado() {
+		return ocupado;
 	}
 	
 	public void setX(int xx) {

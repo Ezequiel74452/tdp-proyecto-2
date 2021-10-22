@@ -4,29 +4,27 @@ import javax.swing.ImageIcon;
 
 public abstract class Tetrimino {
 	
-	protected Bloque[][] grilla;
-	protected Bloque[] bloques;
-	protected int ejeDeRotacion;
-	protected ImageIcon imagen;
-	protected String figuras[];
-	protected boolean puedeRotar;
 	
-	public Tetrimino(int rndm) {
-		grilla = new Bloque[4][4];
-		Bloque cubo1 = new Bloque(rndm);
-		Bloque cubo2 = new Bloque(rndm);
-		Bloque cubo3 = new Bloque(rndm);
-		Bloque cubo4 = new Bloque(rndm);
-		bloques = new Bloque[] {cubo1, cubo2, cubo3, cubo4};
+	protected Bloque w;
+	protected Bloque x;
+	protected Bloque y;
+	protected Bloque z;
+	protected int rotacion;
+	protected Grilla grilla;
+	
+	public Tetrimino(Bloque w, Bloque x, Bloque y, Bloque z, int rotacion, Grilla grilla) {
+		this.w=w;
+		this.x=x;
+		this.y=y;
+		this.z=z;
+		this.rotacion=rotacion;
+		this.grilla=grilla;
 	}
 	
 	
-	protected abstract void acomodarCubos();
-	public void setCubo(Bloque b, int f, int c) {
-		grilla[f][c] = b;
-	}
+	public abstract void ocuparBloques();
 	
-	public void rotar(Bloque[][] grilla2) {
+	public void rotar(Grilla grilla) {
 		
 		int desplazar=0;
 		int xt=bloques[ejeDeRotacion].getX();
@@ -51,11 +49,11 @@ public abstract class Tetrimino {
 	           	 
 	        puedeRotar=true;
 	        
-	        rotarRecursivo(grilla2,0,desplazar);
+	        rotarRecursivo(grilla,0,desplazar);
 			
 	}
 	
-	private void rotarRecursivo(Bloque[][] grilla2,int i,int desplazar) {
+	private void rotarRecursivo(Grilla grilla,int i,int desplazar) {
 		
 		if(!puedeRotar || i==4  )
 			return;
@@ -81,16 +79,16 @@ public abstract class Tetrimino {
         xbRotacion = xt + xbAux;
         ybRotacion = yt + ybAux+desplazar;
         
-        if(solapa(grilla2,xbRotacion,ybRotacion)==false)
+        if(solapa(grilla,xbRotacion,ybRotacion)==false)
         	puedeRotar=false;
         
-        rotarRecursivo(grilla2,i+1,desplazar);
+        rotarRecursivo(grilla,i+1,desplazar);
         
         if(puedeRotar)
         {	
         	
-        	grilla2[xb][yb]=new Bloque(1);
-        	grilla2[xbRotacion][ybRotacion]=bloques[i];
+        	grilla.setBloque(xb, yb, new Bloque(1));
+        	grilla.setBloque(xbRotacion, ybRotacion, bloques[i]);
         	bloques[i].setX(xbRotacion);
         	bloques[i].setY(ybRotacion);
         
@@ -99,10 +97,10 @@ public abstract class Tetrimino {
 		}
 	}
 	
-	private boolean solapa(Bloque[][] grilla2, int xbRotacion, int ybRotacion) {
+	private boolean solapa(Grilla grilla, int xbRotacion, int ybRotacion) {
 		
 		if(xbRotacion<1 || xbRotacion>22 || 
-		( (ybRotacion>0 && ybRotacion<11) && !grilla2[xbRotacion][ybRotacion].esSobre() ))
+		( (ybRotacion>0 && ybRotacion<11) && !grilla.getBloque(xbRotacion,ybRotacion).esSobre() ))
 			return false;
 		else 
 			return true;
@@ -145,11 +143,11 @@ public abstract class Tetrimino {
 
         return MatrizRotada;
     }
-		*/
+		
 	
 	public Bloque getBloquePos(int f, int c) {
 		return grilla[f][c];
-	}
+	}*/
 	public Bloque getBloque(int pos) {
 		return bloques[pos];
 	}
@@ -196,23 +194,23 @@ public abstract class Tetrimino {
 	}
 
 
-	public boolean mover(Bloque[][] grilla2,int direccionH,int direccionV ) {
+	public boolean mover(Grilla grilla,int direccionH,int direccionV ) {
 		boolean sePuede = true;
 		for (int i=0; i<4 && sePuede; i++) {
-			if(!(grilla2[bloques[i].getX()+direccionV][bloques[i].getY()+direccionH].esSobre())) {
+			if(!(grilla.getBloque(bloques[i].getX()+direccionV,bloques[i].getY()+direccionH).esSobre())) {
 				sePuede = false;
 			}
 		}
 		if (sePuede) {
 			for(int i=0;i<4;i++) {
 				Bloque empty = new Bloque(1);
-				grilla2[bloques[i].getX()][bloques[i].getY()]=empty;
+				grilla.setBloque(bloques[i].getX(),bloques[i].getY(),empty);
 				}
 			
 			for (int j=0; j<4; j++) {
 				int x = bloques[j].getX();
 				int y =bloques[j].getY();
-				grilla2[x+direccionV][y+direccionH] = bloques[j];
+				grilla.setBloque(x+direccionV,y+direccionH,bloques[j]);
 				bloques[j].setY(y+direccionH);	
 				bloques[j].setX(x+direccionV);
 				}
@@ -223,5 +221,8 @@ public abstract class Tetrimino {
 			else
 				return false;
 	}
+
+
+	protected abstract boolean checkGameOver(Grilla grilla);
 	
 }
