@@ -2,6 +2,8 @@ package Game;
 
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+
 import TetrisGUI.GUI2;
 
 
@@ -323,6 +325,11 @@ public class Juego {
 	public boolean getGameOver() {
 		
 		return GameOver;
+	}
+
+	public void actualizarVentana(int i, int j, ImageIcon texturaPerimetro) {
+		// TODO Auto-generated method stub
+		
 	} 
 	
 }
