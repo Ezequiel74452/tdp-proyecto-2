@@ -33,7 +33,7 @@ public class Bloque {
 		miGrilla.bloqueCambioEstado(x, y, miRepresentacion.getTextura());
 	}
 	
-	public BloqueGrafico getTextura() {
+	public BloqueGrafico getBloqueGrafico() {
 		return miRepresentacion;
 	}
 	

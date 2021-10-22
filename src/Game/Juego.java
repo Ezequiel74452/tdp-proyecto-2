@@ -4,8 +4,6 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-import TetrisGUI.GUI2;
-
 
 public class Juego {
 	

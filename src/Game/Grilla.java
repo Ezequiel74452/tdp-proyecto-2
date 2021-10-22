@@ -17,7 +17,7 @@ public class Grilla {
 			grilla = new Bloque[23][12];
 			this.miJuego = juego;
 			
-			//Crear perimetro, primero las filas externas, luego las columnas externas
+			//Inicializar bloques perimetro, primero las filas externas, luego las columnas externas
 			
 			BloqueGrafico bloquePerimetro = new BloquePerimetro();
 			ImageIcon texturaPerimetro = bloquePerimetro.getTextura();
@@ -36,7 +36,7 @@ public class Grilla {
 				miJuego.actualizarVentana(22, j, texturaPerimetro);
 			}
 			
-			//Crear el resto de bloques
+			//Inicializar el resto de bloques vacios
 			
 			BloqueGrafico bloqueVacio = new BloqueVacio();
 			ImageIcon texturaVacio = bloqueVacio.getTextura();
@@ -47,44 +47,19 @@ public class Grilla {
 					miJuego.actualizarVentana(i, j, texturaVacio);
 				}
 			}
-	
 	}
 	
 	public void setBloque( int f, int c, Bloque b) {
 		grilla[f][c] = b;
+		miJuego.actualizarVentana(f, c, b.getBloqueGrafico().getTextura());
 	}
 	
 	public Bloque getBloque(int f, int c) {
 		return grilla[f][c];
 	}
 
-	public Tetrimino setTetrimino(int forma, int color) {
-		
-		Tetrimino tetrimino; 
-		
-		switch (forma) {
-		case 0: tetrimino= new T_Tetrimino(color);
-		break;
-		case 1: tetrimino= new J_Tetrimino(color);
-		break;
-		case 2: tetrimino= new L_Tetrimino(color);
-		break;
-		case 3: tetrimino= new O_Tetrimino(color);
-		break;
-		case 4: tetrimino= new I_Tetrimino(color);
-		break;
-		case 5: tetrimino= new S_Tetrimino(color);
-		break;
-		case 6: tetrimino= new Z_Tetrimino(color);
-		break;
-		default: tetrimino= new I_Tetrimino(color);
-		}
-		return tetrimino;
-	}
-
-	public void bloqueCambioEstado(int x, int y, ImageIcon textura) {
-		// TODO Auto-generated method stub
-		
+	public void bloqueCambioEstado(int f, int c, ImageIcon textura) {
+		miJuego.actualizarVentana(f, c, textura);
 	}
 
 }
