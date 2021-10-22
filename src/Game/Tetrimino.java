@@ -24,8 +24,9 @@ public abstract class Tetrimino {
 	
 	public abstract void ocuparBloques();
 	public abstract void moverIzq();
-	public abstract void moverDer(int i);
+	public abstract void moverDer();
 	
+	//Intercambia la posicion de dos bloques dados, e informa a la grilla de actualizar los cambios
 	protected void swap(Bloque b1, Bloque b2)
 	{
 		int x=b1.getX();

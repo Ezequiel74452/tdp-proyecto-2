@@ -1,23 +1,102 @@
 package Game;
-
-import javax.swing.ImageIcon;
+import bloquesGraficos.BloqueGrafico;
+import bloquesGraficos.BloqueNaranja;
 
 public class I_Tetrimino extends Tetrimino {
 	
 	//"I".
-	
-	public I_Tetrimino(int rndm) {
-		super(rndm);
-		acomodarCubos();
-		figuras = new String[] {"/Texturas/Tetriminos/I/I_rojo.png","/Texturas/Tetriminos/I/I_verde.png","/Texturas/Tetriminos/I/I_azul.png","/Texturas/Tetriminos/I/I_amarillo.png","/Texturas/Tetriminos/I/I_violeta.png","/Texturas/Tetriminos/I/I_celeste.png","/Texturas/Tetriminos/I/I_naranja.png"};
-		imagen = new ImageIcon(getClass().getResource(figuras[rndm-2]));
+
+	public I_Tetrimino(Bloque w, Bloque x, Bloque y, Bloque z, int rotacion, Grilla grilla) {
+		super(w, x, y, z, rotacion, grilla);
 	}
-	
-	protected void acomodarCubos() {
-		setCubo(bloques[0], 0, 0);
-		setCubo(bloques[1], 0, 1);
-		setCubo(bloques[2], 0, 2);
-		setCubo(bloques[3], 0, 3);
-		ejeDeRotacion = 2;
+
+	@Override
+	public void ocuparBloques() {
+		// TODO Auto-generated method stub
+		BloqueGrafico naranja = new BloqueNaranja();
+		w.ocupar(naranja);
+		x.ocupar(naranja);
+		y.ocupar(naranja);
+		z.ocupar(naranja);	
+	}
+
+	@Override
+	public void moverIzq() {
+		//Obtengo los bloques a la izquierda del tetrimino
+		Bloque izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);
+		Bloque izquierdaX = grilla.getBloque(x.getX(), x.getY()-1);
+		Bloque izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
+		Bloque izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);
+		
+		//Si no esta rotado o esta rotado 180 grados, muevo cada bloque a la izquierda
+		if(rotacion == 0 || rotacion == 2) {
+			if(izquierdaW.ocupado() == false && izquierdaX.ocupado() == false && izquierdaY.ocupado() == false && izquierdaZ.ocupado() == false) {
+				swap(w, izquierdaW);
+				swap(x, izquierdaX);
+				swap(y, izquierdaY);
+				swap(z, izquierdaZ);
+			}
+		}
+		
+		//Si esta rotado 90 grados o 270 grados, solo necesito revisar el bloque mas proximo a la izquierda 
+		//para 90 grados(Z Y X W)
+		if(rotacion == 1) {
+			if(izquierdaZ.ocupado() == false) {
+				swap(w, izquierdaW);
+				swap(x, izquierdaX);
+				swap(y, izquierdaY);
+				swap(z, izquierdaZ);
+			}
+		}
+		
+		//para 270 grados(W X Y Z)
+		if(rotacion == 3) {
+			if(izquierdaW.ocupado() == false) {
+				swap(w, izquierdaW);
+				swap(x, izquierdaX);
+				swap(y, izquierdaY);
+				swap(z, izquierdaZ);
+			}
+		}
+	}
+
+	@Override
+	public void moverDer() {
+		//Obtengo los bloques a la derecha del tetrimino
+		Bloque derechaW = grilla.getBloque(w.getX(), w.getY()+1);
+		Bloque derechaX = grilla.getBloque(x.getX(), x.getY()+1);
+		Bloque derechaY = grilla.getBloque(y.getX(), y.getY()+1);
+		Bloque derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
+		
+		//Si no esta rotado o esta rotado 180 grados, muevo cada bloque a la derecha
+		if(rotacion == 0 || rotacion == 2) {
+			if(derechaW.ocupado() == false && derechaX.ocupado() == false && derechaY.ocupado() == false && derechaZ.ocupado() == false) {
+				swap(w, derechaW);
+				swap(x, derechaX);
+				swap(y, derechaY);
+				swap(z, derechaZ);
+			}
+		}
+		
+		//Si esta rotado 90 grados o 270 grados, solo necesito revisar el bloque mas proximo a la derecha 
+		//para 90 grados(Z Y X W)
+		if(rotacion == 1) {
+			if(derechaW.ocupado() == false) {
+				swap(w, derechaW);
+				swap(x, derechaX);
+				swap(y, derechaY);
+				swap(z, derechaZ);
+			}
+		}
+		
+		//para 270 grados(W X Y Z)
+		if(rotacion == 3) {
+			if(derechaZ.ocupado() == false) {
+				swap(w, derechaW);
+				swap(x, derechaX);
+				swap(y, derechaY);
+				swap(z, derechaZ);
+			}
+		}
 	}
 }
