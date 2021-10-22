@@ -27,10 +27,11 @@ public class O_Tetrimino extends Tetrimino {
 	
 	
 	public void moverIzq() {
-		//Obtengo los bloques a la izquierda del tetrimino
-		Bloque izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);
+		//Obtengo los bloques a la izquierda del tetrimino						
+		Bloque izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);	
 		Bloque izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
 		
+		//No importa la rotacion
 		if(izquierdaW.ocupado() == false && izquierdaY.ocupado() == false){
 			swap(w, izquierdaW);
 			swap(y, izquierdaY);
@@ -46,6 +47,7 @@ public class O_Tetrimino extends Tetrimino {
 		Bloque derechaX = grilla.getBloque(x.getX(), x.getY()+1);
 		Bloque derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
 		
+		//No importa la rotacion
 		if(derechaX.ocupado() == false && derechaZ.ocupado() == false){
 			swap(x, derechaX);
 			swap(z, derechaZ);

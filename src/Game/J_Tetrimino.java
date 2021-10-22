@@ -1,23 +1,129 @@
 package Game;
 
-import javax.swing.ImageIcon;
+import bloquesGraficos.BloqueAzul;
+import bloquesGraficos.BloqueGrafico;
 
-public class J_Tetrimino extends Tetrimino {
-	
-	//"L"
-	
-	public J_Tetrimino(int rndm) {
-		super(rndm);
-		acomodarCubos();
-		figuras = new String[] {"/Texturas/Tetriminos/J/J_rojo.png","/Texturas/Tetriminos/J/J_verde.png","/Texturas/Tetriminos/J/J_azul.png","/Texturas/Tetriminos/J/J_amarillo.png","/Texturas/Tetriminos/J/J_violeta.png","/Texturas/Tetriminos/J/J_celeste.png","/Texturas/Tetriminos/J/J_naranja.png"};
-		imagen = new ImageIcon(getClass().getResource(figuras[rndm-2]));
+public class J_Tetrimino extends Tetrimino {	
+	//"J"
+	public J_Tetrimino(Bloque w, Bloque x, Bloque y, Bloque z, int rotacion, Grilla grilla) {
+		super(w, x, y, z, rotacion, grilla);
 	}
-	
-	protected void acomodarCubos() {
-		setCubo(bloques[0], 0, 3);
-		setCubo(bloques[1], 1, 1);
-		setCubo(bloques[2], 1, 2);
-		setCubo(bloques[3], 1, 3);
-		ejeDeRotacion = 2;
+
+	@Override
+	public void ocuparBloques() {
+		// TODO Auto-generated method stub
+		BloqueGrafico azul = new BloqueAzul();
+		w.ocupar(azul);
+		x.ocupar(azul);
+		y.ocupar(azul);
+		z.ocupar(azul);
+	}
+
+	@Override
+	public void moverIzq() {
+		// TODO Auto-generated method stub
+		//Obtengo los bloques a la izquierda del tetrimino
+		Bloque izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);
+		Bloque izquierdaX = grilla.getBloque(x.getX(), x.getY()-1);
+		Bloque izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
+		Bloque izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);
+		
+		if(rotacion == 0) {
+			if(izquierdaW.ocupado() == false && izquierdaX.ocupado() == false) {
+				swap(w, izquierdaW);
+				swap(x, izquierdaX);
+				izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
+				swap(y, izquierdaY);
+				izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);
+				swap(z, izquierdaZ);
+			}
+		}
+		
+		if(rotacion == 1) {
+			if(izquierdaX.ocupado() == false && izquierdaY.ocupado() == false && izquierdaZ.ocupado() == false) {
+				swap(x, izquierdaX);
+				swap(y, izquierdaY);
+				swap(z, izquierdaZ);
+				izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);
+				swap(w, izquierdaW);
+			}
+		}
+		
+		if(rotacion == 2) {
+			if(izquierdaW.ocupado() == false && izquierdaZ.ocupado() == false) {
+				swap(w, izquierdaW);
+				swap(z, izquierdaZ);
+				izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
+				swap(y, izquierdaY);
+				izquierdaX = grilla.getBloque(x.getX(), x.getY()-1);
+				swap(x, izquierdaX);
+			}
+		}
+		
+		if(rotacion == 3) {
+			if(izquierdaW.ocupado() == false && izquierdaX.ocupado() == false && izquierdaY.ocupado() == false) {
+				swap(w, izquierdaW);
+				swap(x, izquierdaX);
+				swap(y, izquierdaY);
+				izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);
+				swap(z, izquierdaZ);
+			}
+		}
+	}
+
+	@Override
+	public void moverDer() {
+		// TODO Auto-generated method stub
+		//Obtengo los bloques a la derecha del tetrimino
+		Bloque derechaW = grilla.getBloque(w.getX(), w.getY()+1);
+		Bloque derechaX = grilla.getBloque(x.getX(), x.getY()+1);
+		Bloque derechaY = grilla.getBloque(y.getX(), y.getY()+1);
+		Bloque derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
+		
+		//Si no roto
+		if(rotacion == 0) {
+			if(derechaW.ocupado() == false && derechaZ.ocupado() == false) {
+				swap(w, derechaW);
+				swap(z, derechaZ);
+				derechaY = grilla.getBloque(y.getX(), y.getY()+1);
+				swap(y, derechaY);
+				derechaX = grilla.getBloque(x.getX(), x.getY()+1);
+				swap(x, derechaX);
+			}
+		}
+		
+		//Roto 90 grados
+		if(rotacion == 1) {
+			if(derechaW.ocupado() == false && derechaX.ocupado() == false && derechaY.ocupado() == false) {
+				swap(w, derechaW);
+				swap(x, derechaX);
+				swap(y, derechaY);
+				derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
+				swap(z, derechaZ);
+			}
+		}
+		
+		//Roto 180 grados
+		if(rotacion == 2) {
+			if(derechaW.ocupado() == false && derechaX.ocupado() == false) {
+				swap(w, derechaW);
+				swap(x, derechaX);
+				derechaY = grilla.getBloque(y.getX(), y.getY()+1);
+				swap(y, derechaY);
+				derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
+				swap(z, derechaZ);
+			}
+		}
+		
+		//Roto 270 grados
+		if(rotacion == 3) {
+			if(derechaX.ocupado() == false && derechaY.ocupado() == false && derechaZ.ocupado() == false) {
+				swap(x, derechaX);
+				swap(y, derechaY);
+				swap(z, derechaZ);
+				derechaW = grilla.getBloque(w.getX(), w.getY()+1);
+				swap(w, derechaW);
+			}
+		}
 	}
 }
