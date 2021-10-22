@@ -27,7 +27,7 @@ public class I_Tetrimino extends Tetrimino {
 		Bloque izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);					
 																   					
 		//Si no esta rotado o esta rotado 180 grados
-		if(rotacion == 0 || rotacion == 2) {
+		if(rotacion == 0) {
 			if(izquierdaW.ocupado() == false && izquierdaX.ocupado() == false && izquierdaY.ocupado() == false && izquierdaZ.ocupado() == false) {
 				swap(w, izquierdaW);
 				swap(x, izquierdaX);
@@ -36,30 +36,16 @@ public class I_Tetrimino extends Tetrimino {
 			}
 		}
 
-		//para 90 grados
+		//para 90 grados o 270
 		if(rotacion == 1) {
-			if(izquierdaZ.ocupado() == false) {
-				swap(z, izquierdaZ);
-				izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);
-				swap(w, izquierdaW);
-				izquierdaX = grilla.getBloque(x.getX(), x.getY()-1);
-				swap(x, izquierdaX);
-				izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
-				swap(y, izquierdaY);
-
-			}
-		}
-		
-		//para 270 grados
-		if(rotacion == 3) {
 			if(izquierdaW.ocupado() == false) {
-				swap(w, izquierdaW);
+				swap(w, izquierdaW);	
 				izquierdaX = grilla.getBloque(x.getX(), x.getY()-1);
 				swap(x, izquierdaX);
 				izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
 				swap(y, izquierdaY);
-				izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);
-				swap(z, izquierdaZ);
+				izquierdaZ = grilla.getBloque(z.getX(), z.getY()-1);		
+				swap(z, izquierdaZ);													
 			}
 		}
 	}
@@ -73,7 +59,7 @@ public class I_Tetrimino extends Tetrimino {
 		Bloque derechaZ = grilla.getBloque(z.getX(), z.getY()+1);						
 																 				
 		//Si no roto o esta rotado 180 grados
-		if(rotacion == 0 || rotacion == 2) {
+		if(rotacion == 0) {
 			if(derechaW.ocupado() == false && derechaX.ocupado() == false && derechaY.ocupado() == false && derechaZ.ocupado() == false) {
 				swap(w, derechaW);
 				swap(x, derechaX);
@@ -82,30 +68,18 @@ public class I_Tetrimino extends Tetrimino {
 			}
 		}
 		
-		//Roto 90 grados
+		//Roto 90 grados o 270
 		if(rotacion == 1) {
-			if(derechaW.ocupado() == false) {
-				swap(w, derechaW);
-				derechaX = grilla.getBloque(x.getX(), x.getY()+1);
-				swap(x, derechaX);
+			if(derechaZ.ocupado() == false) {
+				swap(z, derechaZ);
 				derechaY = grilla.getBloque(y.getX(), y.getY()+1);
 				swap(y, derechaY);
-				derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
-				swap(z, derechaZ);
+				derechaX = grilla.getBloque(x.getX(), x.getY()+1);
+				swap(x, derechaX);
+				derechaW = grilla.getBloque(w.getX(), w.getY()+1);
+				swap(w, derechaW);												
 			}
 		}
 		
-		//Roto 270 grados
-		if(rotacion == 3) {
-			if(derechaZ.ocupado() == false) {
-				swap(z, derechaZ);
-				derechaW = grilla.getBloque(w.getX(), w.getY()+1);
-				swap(w, derechaW);
-				derechaX = grilla.getBloque(x.getX(), x.getY()+1);
-				swap(x, derechaX);
-				derechaY = grilla.getBloque(y.getX(), y.getY()+1);
-				swap(y, derechaY);
-			}
-		}
 	}
 }
