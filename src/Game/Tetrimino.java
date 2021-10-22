@@ -23,7 +23,7 @@ public abstract class Tetrimino {
 	
 	
 	public abstract void ocuparBloques();
-	public abstract void moverIzq(int i);
+	public abstract void moverIzq();
 	public abstract void moverDer(int i);
 	
 	protected void swap(Bloque b1, Bloque b2)
@@ -240,8 +240,5 @@ public abstract class Tetrimino {
 			else
 				return false;
 	}
-
-
-	protected abstract boolean checkGameOver(Grilla grilla);
 	
 }

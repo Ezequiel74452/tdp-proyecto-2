@@ -1,6 +1,5 @@
 package Game;
 
-import TetrisGUI.GUI2;
 
 public class Reloj implements Runnable {
 
@@ -28,12 +27,9 @@ public class Reloj implements Runnable {
 			tiempo += ((double)aceleracion/1000);
 			if(aceleracion>300)
 				aceleracion= aceleracion+ (-1)* Math.log(tiempo);
-			this.Tet.operarJuego(3);
-			GUI2.actualizarTiempo();
+			//this.Tet.operarJuego(3);
+			Juego.actualizarTiempo((int)tiempo);
 		}
 	}
 	
-	public int getTiempo() {
-        return (int)tiempo;
-    }
 }

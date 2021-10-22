@@ -55,4 +55,6 @@ public class Bloque {
 	public int getY() {
 		return y;
 	}
+
+
 }

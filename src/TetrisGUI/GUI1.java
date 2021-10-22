@@ -40,16 +40,17 @@ public class GUI1 extends JFrame {
 	private static JLabel lbl_next;
 	private static JLabel lbl_tiempo;
 	private static JLabel lbl_puntuacion;
+	private static Juego miJuego;
 
-	public GUI1(Juego tet, Reloj r) {
-		initialize(tet, r);
+	public GUI1() {
+		initialize();
 	}
 	
-	private void initialize(Juego tet, Reloj r) {
-		this.tetris=tet;
+	private void initialize() {
+		
 	
 		width = 360;
-		height = 605;
+		height = 690;
 		
 		getContentPane().setLayout(null);
 		getContentPane().setBounds(0, 0,width+200, 900);
@@ -106,28 +107,29 @@ public class GUI1 extends JFrame {
 		for(int i=0; i<23; i++) {
 			for(int j=0; j<12; j++) {
 				casillas[i][j] = new JLabel();
-				casillas[i][j].setHorizontalAlignment(SwingConstants.CENTER);						
-				casillas[i][j].setIcon(new ImageIcon(tetris.getGrilla().getBloque(i,j).getTextura()
-							.getImage().getScaledInstance
-							((int)width/12,(int)height/23 , Image.SCALE_DEFAULT)));
+				casillas[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+				casillas[i][j].setBounds(j*30, i*30, 30, 30);
+				/*casillas[i][j].setIcon(new ImageIcon(tetris.getGrilla().getBloque(i,j).getBloqueGrafico().
+						getTextura().getImage().getScaledInstance						
+							((int)width/12,(int)height/23 , Image.SCALE_DEFAULT)));*/
 				panelIzq.add(casillas[i][j]);
 					}		
 		}
 		
-		this.addKeyListener(new KeyListener() {
+			this.addKeyListener(new KeyListener() {
 			
 			public void keyTyped(KeyEvent e) {}
 	
 			public void keyPressed(KeyEvent e) {
 				char c = e.getKeyChar();
 				if(c == 'a' || c=='A') {
-					tetris.operarJuego(1);
+					miJuego.operarJuego(1);
 				} else if (c == 'd' || c=='D') {
-					tetris.operarJuego(2);
+					miJuego.operarJuego(2);
 				} else if (c == 's'|| c=='S') {
-					tetris.operarJuego(3);
+					miJuego.operarJuego(3);
 				} else if (c == 'q'|| c=='Q') {
-					tetris.operarJuego(4);
+					miJuego.operarJuego(4);
 				} 
 			}
 	
@@ -154,34 +156,12 @@ public class GUI1 extends JFrame {
 				e1.printStackTrace();
 			}
 			
-			Thread d= new Thread(r);
-			d.start();	
+			
 	
 	}
 	
-	public static void actualizar() {
-        int iArriba=tetris.getTetrimino().getAltMax()-2;
-        if(iArriba<1)
-            iArriba=1;
-
-        int iAbajo =tetris.getTetrimino().getAltMin()+2;
-        if(iAbajo>21)
-            iAbajo=21;
-        
-        int jIzq = tetris.getTetrimino().getBIzq()-2;
-        if(jIzq<1)
-        	jIzq=1;
-        
-        int jDer = tetris.getTetrimino().getBDer()+2;
-        if(jDer>10)
-        	jDer=10;
-
-
-        for(int i=iArriba; i<=iAbajo; i++) {
-            for(int j=jIzq; j<=jDer; j++) {
-                casillas[i][j].setIcon(new ImageIcon(tetris.obtenerBloque(i, j).getTextura().getImage().getScaledInstance((int) (width/12), (int) (height/23), Image.SCALE_DEFAULT)));
-            }
-        }
+	public static void actualizar(int i, int j, ImageIcon nuevaImg){
+        casillas[i][j].setIcon(new ImageIcon (nuevaImg.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
     }
 	
 	public static void actualizarLinea(int l) {
@@ -206,5 +186,10 @@ public class GUI1 extends JFrame {
 	
 	public static void gameOver() {
 		JOptionPane.showMessageDialog(null, "Game Over");
+	}
+	
+	public void registrarJuego(Juego juego) {
+		miJuego = juego;
+		
 	}
 }

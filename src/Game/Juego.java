@@ -4,10 +4,14 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import TetrisGUI.GUI1;
+
+
 
 public class Juego {
 	
-	protected Bloque[][] grilla;
+	protected static GUI1 miVentana;
+	protected Grilla grilla;
 	private int puntos;
 	private Tetrimino tactual, tsiguiente;
 	private boolean GameOver;
@@ -17,13 +21,15 @@ public class Juego {
 	public static final  int Rotar = 4;
 	private int alturaMax=21;
 	
-	public Juego() {
-		grilla = new Bloque[23][12];
-		crearPerimetro();
-		crearGrillaInicial();
+	public Juego(GUI1 mv) {
+		miVentana = mv;
+		miVentana.registrarJuego(this);
+		grilla = new Grilla(this);
 		puntos = 0;
-		tactual = crearTetrimino();
-		tsiguiente = crearSiguiente();
+		//tactual = crearTetrimino();	
+		//tsiguiente = crearSiguiente();
+		tactual= new O_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		tactual.ocuparBloques();
 		GameOver=false;
 			
 	}
@@ -148,8 +154,8 @@ public class Juego {
 	}	
 	
 	private void moverIzq() {
-		tactual.mover(grilla,-1,0);
-		GUI2.actualizar();
+		tactual.moverIzq();
+
 	}
 	
 	private void moverDer() {
@@ -325,9 +331,19 @@ public class Juego {
 		return GameOver;
 	}
 
-	public void actualizarVentana(int i, int j, ImageIcon texturaPerimetro) {
-		// TODO Auto-generated method stub
+	public void actualizarVentana(int i, int j, ImageIcon textura) {
+		miVentana.actualizar(i,j,textura);
 		
-	} 
+	}
+
+	public Grilla getGrilla() {
+		return grilla;
+	}
+
+	public static void actualizarTiempo(int tiempo) {
+		miVentana.actualizarTiempo(tiempo);
+		
+	}
+
 	
 }
