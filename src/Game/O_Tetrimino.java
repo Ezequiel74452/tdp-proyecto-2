@@ -2,6 +2,8 @@ package Game;
 
 import javax.swing.ImageIcon;
 
+import bloquesGraficos.*;
+
 public class O_Tetrimino extends Tetrimino {
 
 	//"Cuadrado".
@@ -11,54 +13,36 @@ public class O_Tetrimino extends Tetrimino {
 	}
 	
 	public void ocuparBloques() {
-		w.ocupar(BloqueGraficoAmarillo);
-		x.ocupar(BloqueGraficoAmarillo);
-		y.ocupar(BloqueGraficoAmarillo);
-		z.ocupar(BloqueGraficoAmarillo);	
+		BloqueGrafico amarillo = new BloqueAmarillo();
+		w.ocupar(amarillo);
+		x.ocupar(amarillo);
+		y.ocupar(amarillo);
+		z.ocupar(amarillo);	
 	}
 	
-	public void acomodarCubos(Grilla grilla) {
-		grilla.setBloque( 1, 5,(bloques[0]));
-		bloques[0].setX(1);
-		bloques[0].setY(5);
-		grilla.setBloque( 2, 5,(bloques[1]));
-		bloques[1].setX(2);
-		bloques[1].setY(5);
-		grilla.setBloque( 1, 6,(bloques[2]));
-		bloques[2].setX(1);
-		bloques[2].setY(6);
-		grilla.setBloque( 2, 6,(bloques[3]));
-		bloques[3].setX(2);
-		bloques[3].setY(6);
-		ejeDeRotacion = 2;
+	
+	public void rotar(int i) {
+	
 	}
 	
-	public boolean checkGameOver(Grilla grilla) {
-		if(!grilla.getBloque(1, 5).esSobre())
-			return true;
-		grilla.setBloque( 1, 5,(bloques[0]));
-		bloques[0].setX(1);
-		bloques[0].setY(5);
-		if(!grilla.getBloque(2, 5).esSobre())
-			return true;
-		grilla.setBloque( 2, 5,(bloques[1]));
-		bloques[1].setX(2);
-		bloques[1].setY(5);
-		if(!grilla.getBloque(1, 6).esSobre())
-			return true;
-		grilla.setBloque( 1, 6,(bloques[2]));
-		bloques[2].setX(1);
-		bloques[2].setY(6);
-		if(!grilla.getBloque(2, 6).esSobre())
-			return true;
-		grilla.setBloque( 2, 6,(bloques[3]));
-		bloques[3].setX(2);
-		bloques[3].setY(6);
-		ejeDeRotacion = 2;
-		return false;
+	
+	public void moverIzq(int i) {
+		if(grilla.getBloque(w.getX(), w.getY()-1).ocupado()==false &&
+			grilla.getBloque(y.getX(), y.getY()-1).ocupado()==false)
+				swap(w,grilla.getBloque(w.getX(), w.getY()-1));
+				swap(y,grilla.getBloque(w.getX(), w.getY()-1));
+				swap(x,grilla.getBloque(w.getX(), w.getY()-1));
+				swap(z,grilla.getBloque(w.getX(), w.getY()-1));
 	}
 	
-	public void rotar(Grilla grilla){
-		
+	public void moverDer(int i) {
+		if(grilla.getBloque(x.getX(), x.getY()+1).ocupado()==false &&
+				grilla.getBloque(z.getX(), z.getY()+1).ocupado()==false)
+					swap(x,grilla.getBloque(w.getX(), w.getY()+1));
+					swap(z,grilla.getBloque(w.getX(), w.getY()+1));
+					swap(w,grilla.getBloque(w.getX(), w.getY()+1));
+					swap(y,grilla.getBloque(w.getX(), w.getY()+1));
+					
 	}
+	
 }

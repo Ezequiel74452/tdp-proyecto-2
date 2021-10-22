@@ -23,6 +23,25 @@ public abstract class Tetrimino {
 	
 	
 	public abstract void ocuparBloques();
+	public abstract void moverIzq(int i);
+	public abstract void moverDer(int i);
+	
+	protected void swap(Bloque b1, Bloque b2)
+	{
+		int x=b1.getX();
+		int y=b1.getY();
+		
+		Bloque aux = grilla.getBloque(b1.getX(), b1.getY());
+		grilla.setBloque(b1.getX(), b1.getY(), b2);
+		grilla.setBloque(b2.getX(), b2.getY(), aux);
+		
+		b1.setX(b2.getX());
+		b1.setY(b2.getY());
+		
+		b2.setX(x);
+		b2.setY(y);
+		
+	}
 	
 	public void rotar(Grilla grilla) {
 		
