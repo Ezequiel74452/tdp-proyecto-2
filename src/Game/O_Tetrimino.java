@@ -59,6 +59,23 @@ public class O_Tetrimino extends Tetrimino {
 					
 	}
 
-
+	public boolean descender() {
+		
+		//Obtengo los bloques abajo del tetrimino
+		Bloque abajoY = grilla.getBloque(y.getX()+1, y.getY());
+		Bloque abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+		
+		//No importa la rotacion
+		if(abajoY.ocupado() == false && abajoZ.ocupado() == false){
+			swap(y, abajoY);
+			swap(z, abajoZ);
+			Bloque abajoW = grilla.getBloque(w.getX()+1, w.getY());
+			Bloque abajoX = grilla.getBloque(x.getX()+1, x.getY());
+			swap(w, abajoW);
+			swap(x, abajoX);
+			return true;
+		}
+		else return false;
+	}
 	
 }

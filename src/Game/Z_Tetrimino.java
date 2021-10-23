@@ -130,4 +130,82 @@ public class Z_Tetrimino extends Tetrimino {
 			}
 		}
 	}
+	
+	public boolean descender() {
+		
+		boolean toreturn = false;
+		//Obtengo los bloques abajo del tetrimino
+		Bloque abajoY = grilla.getBloque(y.getX()+1, y.getY());
+		Bloque abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+		Bloque abajoW = grilla.getBloque(w.getX()+1, w.getY());
+		Bloque abajoX = grilla.getBloque(x.getX()+1, x.getY());
+		
+		if (rotacion == 0) {		
+			if(abajoY.ocupado() == false && abajoZ.ocupado() == false && abajoW.ocupado() == false){
+				swap(y, abajoY);
+				swap(z, abajoZ);
+				swap(w, abajoW);
+				abajoX = grilla.getBloque(x.getX()+1, x.getY());
+				swap(x, abajoX);
+								
+				toreturn = true;
+			}
+			else toreturn = false;
+		}
+		else if(rotacion == 1) {
+			if(abajoZ.ocupado()==false && abajoX.ocupado()==false )
+				{
+				swap(x, abajoX);
+				swap(z, abajoZ);
+				abajoY = grilla.getBloque(y.getX()+1, y.getY());
+				swap(y, abajoY);			
+				abajoW = grilla.getBloque(w.getX()+1, w.getY());
+				swap(w, abajoW);
+				
+				toreturn = true;
+				}
+			else toreturn = false;
+		}
+		return toreturn;
+	}
+	
+	public void rotar() {
+
+		Bloque newW;
+		Bloque newX;
+		Bloque newY;					
+		Bloque newZ;
+		
+		if (rotacion == 0) {				
+			newW = (grilla.getBloque(w.getX(), w.getY()+2));
+			newX = (grilla.getBloque(x.getX()+1, x.getY()+1));
+			newY = (grilla.getBloque(y.getX(), y.getY()));
+			newZ = (grilla.getBloque(z.getX()+1, z.getY()-1));
+			
+			if((newZ.ocupado()== false) && (newZ.ocupado()== false)) {
+				swap(w, newW);
+				swap(z, newZ);
+				newX = (grilla.getBloque(x.getX()+1, x.getY()+1));
+				swap(x, newX);		
+				swap(y, newY);																						
+				rotacion=1;		
+			}							
+		}
+		else if(rotacion == 1) {
+			
+			newW = (grilla.getBloque(w.getX(), w.getY()-2));
+			newX = (grilla.getBloque(x.getX()-1, x.getY()-1));
+			newY = (grilla.getBloque(y.getX(), y.getY()));
+			newZ = (grilla.getBloque(z.getX()-1, z.getY()+1));
+			
+			if(newW.ocupado()== false  && newX.ocupado()== false) {
+				swap(w, newW);
+				swap(x, newX);	
+				newZ = (grilla.getBloque(z.getX()-1, z.getY()+1));
+				swap(z, newZ);
+				swap(y, newY);				
+				rotacion=0;
+			}
+		}
+	}
 }

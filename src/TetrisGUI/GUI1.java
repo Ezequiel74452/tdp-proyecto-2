@@ -40,6 +40,7 @@ public class GUI1 extends JFrame {
 	private static Juego tetris;
 	private static JLabel lbl_tiempo;
 	private static JLabel lbl_puntuacion;
+	private static JLabel lbl_next;
 	private static Juego miJuego;
 
 	public GUI1() {
@@ -103,7 +104,11 @@ public class GUI1 extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(40, 140, 120, 120);
 		panelDer.add(panel);
-		panel.setLayout(new GridLayout(4, 4, 0, 0));
+		panel.setLayout(null);
+		
+		lbl_next = new JLabel("");
+		lbl_next.setBounds(0, 0, 120, 120);
+		panel.add(lbl_next);
 		
 		casillas = new JLabel[23][12];
 		for(int i=0; i<23; i++) {
@@ -180,6 +185,7 @@ public class GUI1 extends JFrame {
 		}
 	}*/
 	
+	/*
 	public void actualizarNext(int x, int y,int x1,int y1,int x2, int y2,int x3, int y3, ImageIcon icon) {
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
@@ -190,6 +196,18 @@ public class GUI1 extends JFrame {
 		casillasSiguiente[x1][y1].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 		casillasSiguiente[x2][y2].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 		casillasSiguiente[x3][y3].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
+	}*/
+	
+	public void actualizarNext(int x) {
+		switch (x) {
+		case 0: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/T_celeste.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
+		case 1: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/O_amarillo.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
+		case 2: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/I_naranja.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
+		case 3: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/S_rojo.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
+		case 4: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/Z_violeta.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
+		case 5: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/J_azul.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
+		case 6: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/L_verde.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));
+		}
 	}
 	
 	public void actualizarPuntuación() {

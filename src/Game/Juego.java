@@ -20,18 +20,27 @@ public class Juego {
 	public static final  int MoverA = 3;
 	public static final  int Rotar = 4;
 	private int alturaMax=21;
+	private int siguiente;
 	
 	public Juego(GUI1 mv) {
 		miVentana = mv;
 		miVentana.registrarJuego(this);
 		grilla = new Grilla(this);
 		puntos = 0;
-		tactual = crearTetrimino();	
+		
+		//tactual = crearTetrimino(getNext());
+		tactual = crearTetrimino(4);
 		setTetrimino(tactual);
-		tsiguiente= crearTetrimino();
-		actualizarNext(tsiguiente);
-		GameOver=false;
-			
+		siguiente = getNext();
+		//tsiguiente= crearTetrimino();
+		actualizarNext(siguiente);
+		GameOver=false;			
+	}
+	
+	public int getNext() {
+		Random ran = new Random();
+		int num = ran.nextInt(5);
+		return num;
 	}
 	
 	public synchronized void operarJuego(int operacion) {
@@ -39,14 +48,13 @@ public class Juego {
 		switch (operacion) {
 		case MoverI: {moverIzq();break;}
 		case MoverD: {moverDer();break;}
-		//case MoverA: {descender();break;}
-		//case Rotar: {rotar();break;}
+		case MoverA: {descender();break;}
+		case Rotar: {rotar();break;}
+		}
 	}
-		
-	}
 	
 	
-	
+	/*
 	public Tetrimino crearTetrimino() {
 		Random ran = new Random();
 		int num = ran.nextInt(7);
@@ -65,6 +73,23 @@ public class Juego {
 		case 5: t= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
 		break;
 		case 6: t= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		break;
+		}
+		return t;
+	}
+	*/
+	public Tetrimino crearTetrimino(int num) {
+		Tetrimino t = null;
+		switch (num) {
+		case 0: t= new T_Tetrimino(grilla.getBloque(2, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
+		break;
+		case 1: t= new O_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		break;
+		case 2: t= new I_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 7), 1, grilla);
+		break;
+		case 3: t= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
+		break;
+		case 4: t= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
 		break;
 		}
 		return t;
@@ -136,6 +161,20 @@ public class Juego {
 	
 	private void moverDer() {
 		tactual.moverDer();
+	}
+	
+	public void rotar() {	   
+		tactual.rotar();		
+	}
+	
+	private void descender() {
+		if(!tactual.descender()) {
+			tactual=crearTetrimino(siguiente);			
+			setTetrimino(tactual);
+			siguiente = getNext();
+			actualizarNext(siguiente);
+		}
+			
 	}
 	
 	/*
@@ -215,11 +254,7 @@ public class Juego {
 		}
 	}
 	
-	public void rotar() {
-	   
-		tactual.rotar(grilla);
-		//miVentana.actualizar();
-	}*/
+	*/
 	
 	
 
@@ -241,7 +276,7 @@ public class Juego {
 		miVentana.actualizarTiempo(tiempo);
 		
 	}
-	
+	/*
 	private void actualizarNext(Tetrimino ts) {
 		
 		ImageIcon icon =new ImageIcon(getClass().getResource("/Texturas/Bloques/Gris.png"));
@@ -259,5 +294,9 @@ public class Juego {
 		int y3 = ts.getZ().getY()-4;
 			
 		miVentana.actualizarNext(x,y,x1,y1,x2,y2,x3,y3,icon);		
-	}	
+	}	*/
+	
+	private void actualizarNext(int s) {
+		miVentana.actualizarNext(s);
+	}
 }

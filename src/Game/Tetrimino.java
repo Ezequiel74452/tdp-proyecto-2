@@ -1,6 +1,6 @@
 package Game;
 
-
+import bloquesGraficos.BloqueVacio;
 
 public abstract class Tetrimino {
 	
@@ -61,5 +61,8 @@ public abstract class Tetrimino {
 	public Bloque getZ() {
 		return z;
 	}
+
+
+	protected abstract boolean descender();
 	
 }
