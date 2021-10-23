@@ -28,8 +28,8 @@ public class Juego {
 		puntos = 0;
 		tactual = crearTetrimino();	
 		setTetrimino(tactual);
-		//tsiguiente= crearTetrimino();
-		//actualizarNext(tsiguiente);
+		tsiguiente= crearTetrimino();
+		actualizarNext(tsiguiente);
 		GameOver=false;
 			
 	}
@@ -40,7 +40,7 @@ public class Juego {
 		case MoverI: {moverIzq();break;}
 		case MoverD: {moverDer();break;}
 		//case MoverA: {descender();break;}
-		case Rotar: {rotar();break;}
+		//case Rotar: {rotar();break;}
 	}
 		
 	}
@@ -50,23 +50,24 @@ public class Juego {
 	public Tetrimino crearTetrimino() {
 		Random ran = new Random();
 		int num = ran.nextInt(7);
+		Tetrimino t = null;
 		switch (num) {
-		case 0: tactual= new T_Tetrimino(grilla.getBloque(2, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
+		case 0: t= new T_Tetrimino(grilla.getBloque(2, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
 		break;
-		case 1: tactual= new J_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 6), 0, grilla);
+		case 1: t= new J_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 6), 0, grilla);
 		break;
-		case 2: tactual= new L_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
+		case 2: t= new L_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
 		break;
-		case 3: tactual= new O_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		case 3: t= new O_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
 		break;
-		case 4: tactual= new I_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 7), 1, grilla);
+		case 4: t= new I_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 7), 1, grilla);
 		break;
-		case 5: tactual= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
+		case 5: t= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
 		break;
-		case 6: tactual= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		case 6: t= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
 		break;
 		}
-		return tactual;
+		return t;
 	}
 	
 	/*
@@ -213,12 +214,12 @@ public class Juego {
 			GUI2.actualizarLinea(j);
 		}
 	}
-	*/
+	
 	public void rotar() {
 	   
 		tactual.rotar(grilla);
 		//miVentana.actualizar();
-	}
+	}*/
 	
 	
 
@@ -240,29 +241,23 @@ public class Juego {
 		miVentana.actualizarTiempo(tiempo);
 		
 	}
-	/*
+	
 	private void actualizarNext(Tetrimino ts) {
 		
-		ImageIcon icon =ts.getW().getBloqueGrafico().getTextura();
+		ImageIcon icon =new ImageIcon(getClass().getResource("/Texturas/Bloques/Gris.png"));
 		
-		int x =ts.getW().getX();
+		int x = ts.getW().getX();
 		int y = ts.getW().getY()-4;
 		
 		int x1= ts.getX().getX();
-		int y1 =ts.getX().getY()-4;
+		int y1= ts.getX().getY()-4;
 		
 		int x2 = ts.getY().getX();
 		int y2 = ts.getY().getY()-4;
 		
 		int x3 = ts.getZ().getX();
 		int y3 = ts.getZ().getY()-4;
-	
-		
-		miVentana.actualizarNext(x,y,x1,y1,x2,y2,x3,y3,icon);
-
-		
-	}*/
-	
-
-	
+			
+		miVentana.actualizarNext(x,y,x1,y1,x2,y2,x3,y3,icon);		
+	}	
 }

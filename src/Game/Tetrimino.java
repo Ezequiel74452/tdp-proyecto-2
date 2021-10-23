@@ -51,15 +51,15 @@ public abstract class Tetrimino {
 	}
 	
 	public Bloque getX() {
-		return w;
+		return x;
 	}
 	
 	public Bloque getY() {
-		return w;
+		return y;
 	}
 	
 	public Bloque getZ() {
-		return w;
+		return z;
 	}
 	
 }
