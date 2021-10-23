@@ -28,8 +28,8 @@ public class Juego {
 		puntos = 0;
 		tactual = crearTetrimino();	
 		setTetrimino(tactual);
-		tsiguiente= crearTetrimino();
-		actualizarNext(tsiguiente);
+		//tsiguiente= crearTetrimino();
+		//actualizarNext(tsiguiente);
 		GameOver=false;
 			
 	}
@@ -228,7 +228,7 @@ public class Juego {
 	}
 	
 	public void actualizarVentana(int i, int j, ImageIcon textura) {
-		miVentana.actualizar(i,j,textura);
+		GUI1.actualizar(i,j,textura);
 		
 	}
 
@@ -240,28 +240,28 @@ public class Juego {
 		miVentana.actualizarTiempo(tiempo);
 		
 	}
-	
+	/*
 	private void actualizarNext(Tetrimino ts) {
 		
 		ImageIcon icon =ts.getW().getBloqueGrafico().getTextura();
 		
 		int x =ts.getW().getX();
-		int y = ts.getW().getY();
+		int y = ts.getW().getY()-4;
 		
 		int x1= ts.getX().getX();
-		int y1 =ts.getX().getY();
+		int y1 =ts.getX().getY()-4;
 		
 		int x2 = ts.getY().getX();
-		int y2 = ts.getY().getY();
+		int y2 = ts.getY().getY()-4;
 		
 		int x3 = ts.getZ().getX();
-		int y3 = ts.getZ().getY();
+		int y3 = ts.getZ().getY()-4;
 	
 		
 		miVentana.actualizarNext(x,y,x1,y1,x2,y2,x3,y3,icon);
 
 		
-	}
+	}*/
 	
 
 	

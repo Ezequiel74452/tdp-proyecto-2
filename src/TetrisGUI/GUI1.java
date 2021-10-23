@@ -103,6 +103,7 @@ public class GUI1 extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(40, 140, 120, 120);
 		panelDer.add(panel);
+		panel.setLayout(new GridLayout(4, 4, 0, 0));
 		
 		casillas = new JLabel[23][12];
 		for(int i=0; i<23; i++) {
@@ -113,7 +114,7 @@ public class GUI1 extends JFrame {
 				panelIzq.add(casillas[i][j]);
 					}		
 		}
-		
+		/*
 		casillasSiguiente = new JLabel[4][4];
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
@@ -122,7 +123,7 @@ public class GUI1 extends JFrame {
 				casillasSiguiente[i][j].setBounds(j*30, i*30, 30, 30);
 				panel.add(casillasSiguiente[i][j]);
 			}
-		}
+		}*/
 		
 			this.addKeyListener(new KeyListener() {
 			
@@ -168,7 +169,7 @@ public class GUI1 extends JFrame {
 	
 	}
 	
-	public void actualizar(int i, int j, ImageIcon nuevaImg){
+	public static void actualizar(int i, int j, ImageIcon nuevaImg){
         casillas[i][j].setIcon(new ImageIcon (nuevaImg.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
     }
 	
@@ -178,15 +179,19 @@ public class GUI1 extends JFrame {
 			casillas[l][i].setIcon(new ImageIcon(tetris.obtenerBloque(l, i).getTextura().getImage().getScaledInstance((int) (width/12), (int) (height/23), Image.SCALE_DEFAULT)));
 		}
 	}*/
-	
+	/*
 	public void actualizarNext(int x, int y,int x1,int y1,int x2, int y2,int x3, int y3, ImageIcon icon) {
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				casillasSiguiente[i][j].setIcon(null);
+				casillasSiguiente[i][j].setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Bloques/Empty.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			}
+			casillasSiguiente[x][y].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
+			casillasSiguiente[x1][y1].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
+			casillasSiguiente[x2][y2].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
+			casillasSiguiente[x3][y3].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			
 		}
-	}
+	}*/
 	
 	public void actualizarPuntuación() {
 		lbl_puntuacion.setText(Integer.toString(tetris.getPuntos()));
