@@ -179,13 +179,13 @@ public class GUI1 extends JFrame {
 		}
 	}*/
 	
-	public void actualizarNext(int x, int y, ImageIcon icon) {
+	public void actualizarNext(int x, int y,int x1,int y1,int x2, int y2,int x3, int y3, ImageIcon icon) {
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
 				casillasSiguiente[i][j].setIcon(null);
 			}
+			
 		}
-		
 	}
 	
 	public void actualizarPuntuación() {

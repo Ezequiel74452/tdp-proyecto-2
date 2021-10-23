@@ -250,11 +250,23 @@ public class Juego {
 	
 	private void actualizarNext(Tetrimino ts) {
 		
+		ImageIcon icon =ts.getW().getBloqueGrafico().getTextura();
 		
-		miVentana.actualizarNext(ts.getW().getX(), ts.getW().getY(),ts.getW().getBloqueGrafico().getTextura());
-		miVentana.actualizarNext(ts.getX().getX(), ts.getX().getY(),ts.getX().getBloqueGrafico().getTextura());
-		miVentana.actualizarNext(ts.getY().getX(), ts.getY().getY(),ts.getY().getBloqueGrafico().getTextura());
-		miVentana.actualizarNext(ts.getZ().getX(), ts.getZ().getY(),ts.getZ().getBloqueGrafico().getTextura());
+		int x =ts.getW().getX();
+		int y = ts.getW().getY();
+		
+		int x1= ts.getX().getX();
+		int y1 =ts.getX().getY();
+		
+		int x2 = ts.getY().getX();
+		int y2 = ts.getY().getY();
+		
+		int x3 = ts.getZ().getX();
+		int y3 = ts.getZ().getY();
+	
+		
+		miVentana.actualizarNext(x,y,x1,y1,x2,y2,x3,y3,icon);
+
 		
 	}
 	
