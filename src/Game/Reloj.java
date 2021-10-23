@@ -28,7 +28,7 @@ public class Reloj implements Runnable {
 			if(aceleracion>300)
 				aceleracion= aceleracion+ (-1)* Math.log(tiempo);
 			//this.Tet.operarJuego(3);
-			Juego.actualizarTiempo((int)tiempo);
+			Tet.actualizarTiempo((int)tiempo);
 		}
 	}
 	

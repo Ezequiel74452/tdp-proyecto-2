@@ -26,10 +26,10 @@ public class Juego {
 		miVentana.registrarJuego(this);
 		grilla = new Grilla(this);
 		puntos = 0;
-		//tactual = crearTetrimino();	
-		//tsiguiente = crearSiguiente();
-		tactual= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
-		tactual.ocuparBloques();
+		tactual = crearTetrimino();	
+		setTetrimino(tactual);
+		tsiguiente= crearTetrimino();
+		actualizarNext(tsiguiente);
 		GameOver=false;
 			
 	}
@@ -39,7 +39,7 @@ public class Juego {
 		switch (operacion) {
 		case MoverI: {moverIzq();break;}
 		case MoverD: {moverDer();break;}
-		case MoverA: {descender();break;}
+		//case MoverA: {descender();break;}
 		case Rotar: {rotar();break;}
 	}
 		
@@ -75,6 +75,8 @@ public class Juego {
 		}
 		return tactual;
 	}
+	
+	/*
 	public Tetrimino crearSiguiente() {
 		Random ran = new Random();
 		int num = ran.nextInt(7);
@@ -97,7 +99,7 @@ public class Juego {
 		break;
 		}
 		return tsiguiente;
-	}
+	}*/
 	
 	/*private void setTetrimino(Tetrimino tr) {
 		
@@ -142,6 +144,7 @@ public class Juego {
 		tactual.moverDer();
 	}
 	
+	/*
 	private void descender() {
 		if(tactual.mover(grilla, 0, 1))
 		{	
@@ -167,24 +170,16 @@ public class Juego {
 			GUI2.actualizar();
 				
 	}
-	
+	*/
 	public int getPuntos() {
 		return puntos;
-	}
-	
-	private void setBloque(Bloque b, int f, int c) {
-		grilla[f][c] = b;
-	}
-	
-	public Bloque obtenerBloque(int f, int c) {
-		return grilla[f][c];
 	}
 	
 	public Tetrimino getTetrimino() {
 		return tactual;
 	}
 	
-	
+	/*
 	public void checkLineas(int min, int max) {
 		int cant=0;
 		boolean seLimpia = true;
@@ -225,91 +220,20 @@ public class Juego {
 			GUI2.actualizarLinea(j);
 		}
 	}
-	
+	*/
 	public void rotar() {
 	   
 		tactual.rotar(grilla);
-		GUI2.actualizar();
+		//miVentana.actualizar();
 	}
 	
-	/*
-	public void rotar(){
-		
-		boolean solapado = false;
-		int [][] matrizRotada;
-		int i,j;
-		
-		matrizRotada = tactual.rotar();
-		
-		
-		int min=matrizRotada[0][1];
-		int max=matrizRotada[0][1];
-		
-		for( j=0;j<4;j++)
-		{
-			if (matrizRotada[j][1]<min)
-				min=matrizRotada[j][1];
-			if (matrizRotada[j][1]>max)
-				max=matrizRotada[j][1];
-		}
-		
-		if(min==0)
-			for(j=0;j<4;j++) {
-				matrizRotada[j][1]+=1;	
-			}
-		if(min==-1)
-			for(j=0;j<4;j++) {
-				matrizRotada[j][1]+=2;	
-			}
-		if(max==11)
-			for(j=0;j<4;j++) {
-				matrizRotada[j][1]-=1;	
-			}
-		if(max==12)
-			for(j=0;j<4;j++) {
-				matrizRotada[j][1]-=2;	
-			}
-				
-		i=0;
-		while(!solapado && (i<4) ) {
-			
-			solapado = Solapa(matrizRotada[i][0],matrizRotada[i][1]);
-			i++;			
-		}
-		
-		if (!solapado) {
-			for( i=0;i<4;i++) {
-				Bloque empty = new Bloque(1);
-				grilla[tactual.getBloque(i).getX()][tactual.getBloque(i).getY()]=empty;
-			}
-			
-			for(i=0;i<4;i++)
-			{	
-				tactual.getBloque(i).setX(matrizRotada[i][0]);
-				tactual.getBloque(i).setY(matrizRotada[i][1]);
-				grilla[matrizRotada[i][0]][matrizRotada[i][1]]=tactual.getBloque(i);
-			}
-			
-		}
-	} 
 	
-	 private boolean Solapa(int x, int y) {
-		
-		boolean solapado=false;
-		
-		if ((x<0) || (x>22) || y<0 || y>11 || (!grilla[x][y].esSobre()))
-		solapado = true;
-		
-		return solapado;
-		
-	}
-	*/
 
 	public boolean getGameOver() {
 		
 		return GameOver;
 	}
-
+	
 	public void actualizarVentana(int i, int j, ImageIcon textura) {
 		miVentana.actualizar(i,j,textura);
 		
@@ -319,10 +243,21 @@ public class Juego {
 		return grilla;
 	}
 
-	public static void actualizarTiempo(int tiempo) {
+	public void actualizarTiempo(int tiempo) {
 		miVentana.actualizarTiempo(tiempo);
 		
 	}
+	
+	private void actualizarNext(Tetrimino ts) {
+		
+		
+		miVentana.actualizarNext(ts.getW().getX(), ts.getW().getY(),ts.getW().getBloqueGrafico().getTextura());
+		miVentana.actualizarNext(ts.getX().getX(), ts.getX().getY(),ts.getX().getBloqueGrafico().getTextura());
+		miVentana.actualizarNext(ts.getY().getX(), ts.getY().getY(),ts.getY().getBloqueGrafico().getTextura());
+		miVentana.actualizarNext(ts.getZ().getX(), ts.getZ().getY(),ts.getZ().getBloqueGrafico().getTextura());
+		
+	}
+	
 
 	
 }

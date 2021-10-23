@@ -1,6 +1,6 @@
 package Game;
 
-import javax.swing.ImageIcon;
+
 
 public abstract class Tetrimino {
 	
@@ -45,4 +45,21 @@ public abstract class Tetrimino {
 	}
 	
 	public abstract void rotar();
+	
+	public Bloque getW() {
+		return w;
+	}
+	
+	public Bloque getX() {
+		return w;
+	}
+	
+	public Bloque getY() {
+		return w;
+	}
+	
+	public Bloque getZ() {
+		return w;
+	}
+	
 }
