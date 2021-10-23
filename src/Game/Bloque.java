@@ -1,8 +1,7 @@
 package Game;
 
-import javax.swing.ImageIcon;
-
 import bloquesGraficos.BloqueGrafico;
+import bloquesGraficos.BloqueVacio;
 
 public class Bloque {
 	
@@ -27,8 +26,9 @@ public class Bloque {
 		
 	}
 
-	public void desOcupar(BloqueGrafico t) {
-		miRepresentacion=t;
+	public void desOcupar() {
+		BloqueVacio empty = new BloqueVacio();
+		miRepresentacion=empty;
 		ocupado = false;
 		miGrilla.bloqueCambioEstado(x, y, miRepresentacion.getTextura());
 	}
@@ -55,6 +55,4 @@ public class Bloque {
 	public int getY() {
 		return y;
 	}
-
-
 }

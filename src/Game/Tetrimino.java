@@ -1,7 +1,5 @@
 package Game;
 
-import bloquesGraficos.BloqueVacio;
-
 public abstract class Tetrimino {
 	
 	
@@ -61,8 +59,37 @@ public abstract class Tetrimino {
 	public Bloque getZ() {
 		return z;
 	}
-
-
+	
+	public int getAltMax() {
+		int toreturn=21;
+		
+		if(w.getX()<toreturn)
+			toreturn=w.getX();
+		if(x.getX()<toreturn)
+			toreturn=x.getX();
+		if(y.getX()<toreturn)
+			toreturn=y.getX();
+		if(z.getX()<toreturn)
+			toreturn=z.getX();
+		
+		return toreturn;
+	}
+	
+	public int getAltMin() {
+		int toreturn=0;
+		
+		if(w.getX()>toreturn)
+			toreturn=w.getX();
+		if(x.getX()>toreturn)
+			toreturn=x.getX();
+		if(y.getX()>toreturn)
+			toreturn=y.getX();
+		if(z.getX()>toreturn)
+			toreturn=z.getX();
+		
+		return toreturn;
+	}
+	
 	protected abstract boolean descender();
 	
 }

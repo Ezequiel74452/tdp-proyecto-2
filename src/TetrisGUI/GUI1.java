@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -22,11 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
-
 import Game.Juego;
-import Game.Reloj;
-import javax.swing.JSplitPane;
 
 
 
@@ -174,7 +169,7 @@ public class GUI1 extends JFrame {
 	
 	}
 	
-	public static void actualizar(int i, int j, ImageIcon nuevaImg){
+	public void actualizar(int i, int j, ImageIcon nuevaImg){
         casillas[i][j].setIcon(new ImageIcon (nuevaImg.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
     }
 	
@@ -210,8 +205,8 @@ public class GUI1 extends JFrame {
 		}
 	}
 	
-	public void actualizarPuntuación() {
-		lbl_puntuacion.setText(Integer.toString(tetris.getPuntos()));
+	public void actualizarPuntuación(int p) {
+		lbl_puntuacion.setText(Integer.toString(p));
 	}
 	
 	public void actualizarTiempo(int tiempo) {
@@ -223,7 +218,6 @@ public class GUI1 extends JFrame {
 	}
 	
 	public void registrarJuego(Juego juego) {
-		miJuego = juego;
-		
+		miJuego = juego;		
 	}
 }
