@@ -163,18 +163,35 @@ public class J_Tetrimino extends Tetrimino {
 				swap(x, rotaX);
 				rotaW = grilla.getBloque(w.getX()+2, w.getY());
 				swap(w, rotaW);
+				rotacion++;
 			}
 		}
+		
 		if(rotacion == 2) {
 			rotaZ = grilla.getBloque(z.getX()-1, z.getY()+1);
 			rotaY = grilla.getBloque(y.getX()-2, y.getY());
 			if(rotaZ.ocupado() == false && rotaY.ocupado() == false) {
 				swap(z, rotaZ);
 				swap(y, rotaY);
-				rotaX = grilla.getBloque(x.getX()+1, x.getY()-1);
+				rotaX = grilla.getBloque(x.getX()-1, x.getY()-1);
 				swap(x, rotaX);
-				rotaW = grilla.getBloque(w.getX()+2, w.getY());
+				rotaW = grilla.getBloque(w.getX(), w.getY()-2);
 				swap(w, rotaW);
+				rotacion++;
+			}
+		}
+		
+		if(rotacion == 3) {
+			rotaZ = grilla.getBloque(z.getX()+2, z.getY()+1);
+			rotaY = grilla.getBloque(y.getX()+1, y.getY()+2);
+			rotaX = grilla.getBloque(x.getX(), x.getY()+1);
+			if(rotaZ.ocupado() == false && rotaY.ocupado() == false && rotaX.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(y, rotaY);
+				swap(x, rotaX);
+				rotaW = grilla.getBloque(w.getX()-1, w.getY());
+				swap(w, rotaW);
+				rotacion = 0;
 			}
 		}
 	}
