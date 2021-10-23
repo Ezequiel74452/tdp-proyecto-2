@@ -53,13 +53,15 @@ public class T_Tetrimino extends Tetrimino {
 		
 		//Roto 180 grados
 		if(rotacion == 2) {
-			if(izquierdaZ.ocupado() == false && izquierdaY.ocupado() == false) {
-				swap(y, izquierdaY);
+			if(izquierdaZ.ocupado() == false && izquierdaW.ocupado() == false) {
+				swap(w, izquierdaW);
 				swap(z, izquierdaZ);
+				izquierdaY = grilla.getBloque(y.getX(), y.getY()-1);
+				swap(y, izquierdaY);			
 				izquierdaX = grilla.getBloque(x.getX(), x.getY()-1);
 				swap(x, izquierdaX);
-				izquierdaW = grilla.getBloque(w.getX(), w.getY()-1);
-				swap(w, izquierdaW);
+
+				
 			}
 		}
 		//para 270 grados
@@ -106,13 +108,14 @@ public class T_Tetrimino extends Tetrimino {
 		}
 		//Roto 180 grados
 		if(rotacion == 2) {
-			if(derechaW.ocupado() == false && derechaZ.ocupado() == false) {
+			if(derechaW.ocupado() == false && derechaX.ocupado() == false) {
 				swap(w, derechaW);
-				swap(z, derechaZ);
-				derechaX = grilla.getBloque(x.getX(), x.getY()+1);
 				swap(x, derechaX);
-				derechaY = grilla.getBloque(y.getX(), y.getY()+1);
-				swap(y, derechaY);
+				derechaY = grilla.getBloque(y.getX(), y.getY()+1);	
+				swap(y, derechaY);				
+				derechaZ = grilla.getBloque(z.getX(), z.getY()+1);
+				swap(z, derechaZ);
+				
 			}
 		}
 		

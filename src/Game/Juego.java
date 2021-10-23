@@ -28,7 +28,7 @@ public class Juego {
 		puntos = 0;
 		//tactual = crearTetrimino();	
 		//tsiguiente = crearSiguiente();
-		tactual= new J_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), 0, grilla);
+		tactual= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
 		tactual.ocuparBloques();
 		GameOver=false;
 			
@@ -51,22 +51,22 @@ public class Juego {
 		Random ran = new Random();
 		int num = ran.nextInt(7);
 		switch (num) {
-		case 0: tactual= new T_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), 0, grilla);
+		case 0: tactual= new T_Tetrimino(grilla.getBloque(2, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
 		setTetrimino(tactual);
 		break;
-		case 1: tactual= new J_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), 0, grilla);
+		case 1: tactual= new J_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 6), 0, grilla);
 		setTetrimino(tactual);
 		break;
-		case 2: tactual= new L_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), 0, grilla);
+		case 2: tactual= new L_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
 		setTetrimino(tactual);
 		break;
 		case 3: tactual= new O_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
 		setTetrimino(tactual);
 		break;
-		case 4: tactual= new I_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 7), 0, grilla);
+		case 4: tactual= new I_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 7), 1, grilla);
 		setTetrimino(tactual);
 		break;
-		case 5: tactual= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 4), 0, grilla);
+		case 5: tactual= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
 		setTetrimino(tactual);
 		break;
 		case 6: tactual= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
