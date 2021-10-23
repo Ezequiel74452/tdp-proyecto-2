@@ -133,4 +133,50 @@ public class J_Tetrimino extends Tetrimino {
 			}
 		}
 	}
+
+	@Override
+	public void rotar() {
+		// TODO Auto-generated method stub
+		Bloque rotaW, rotaX, rotaY, rotaZ;	
+		
+		if(rotacion == 0){
+			rotaZ = grilla.getBloque(z.getX(), z.getY()-1);
+			rotaW = grilla.getBloque(w.getX()-1, w.getY()+2);
+			if(rotaZ.ocupado() == false && rotaW.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(w, rotaW);
+				rotaX = grilla.getBloque(x.getX(), x.getY()+1);
+				swap(x, rotaX);
+				rotaY = grilla.getBloque(y.getX()+1, y.getY());
+				swap(y, rotaY);	
+				rotacion++;
+			}
+		}
+		
+		if(rotacion == 1) {
+			rotaZ = grilla.getBloque(z.getX()-1, z.getY()-1);
+			rotaY = grilla.getBloque(y.getX(), y.getY()-2);
+			if(rotaZ.ocupado() == false && rotaY.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(y, rotaY);
+				rotaX = grilla.getBloque(x.getX()+1, x.getY()-1);
+				swap(x, rotaX);
+				rotaW = grilla.getBloque(w.getX()+2, w.getY());
+				swap(w, rotaW);
+			}
+		}
+		if(rotacion == 2) {
+			rotaZ = grilla.getBloque(z.getX()-1, z.getY()+1);
+			rotaY = grilla.getBloque(y.getX()-2, y.getY());
+			if(rotaZ.ocupado() == false && rotaY.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(y, rotaY);
+				rotaX = grilla.getBloque(x.getX()+1, x.getY()-1);
+				swap(x, rotaX);
+				rotaW = grilla.getBloque(w.getX()+2, w.getY());
+				swap(w, rotaW);
+			}
+		}
+	}
+	
 }
