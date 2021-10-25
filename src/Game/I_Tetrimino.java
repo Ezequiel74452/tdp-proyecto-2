@@ -1,7 +1,6 @@
 package Game;
 import bloquesGraficos.BloqueGrafico;
 import bloquesGraficos.BloqueNaranja;
-import bloquesGraficos.BloqueVacio;
 
 public class I_Tetrimino extends Tetrimino {
 	//"I"

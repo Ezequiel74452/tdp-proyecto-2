@@ -126,4 +126,117 @@ public class L_Tetrimino extends Tetrimino {
 			}
 		}
 	}
+
+	@Override
+	public void rotar() {
+		// TODO Auto-generated method stub
+		Bloque rotaW, rotaX, rotaZ;	
+		
+		if(rotacion == 0){
+			rotaZ = grilla.getBloque(z.getX()+1, z.getY()-1);
+			rotaW = grilla.getBloque(w.getX()+2, w.getY());
+			rotaX = grilla.getBloque(x.getX()-1, x.getY()+1);
+			if(rotaZ.ocupado() == false && rotaW.ocupado() == false && rotaX.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(w, rotaW);
+				swap(x, rotaX);
+				rotacion++;
+			}
+		}
+		
+		if(rotacion == 1) {
+			rotaZ = grilla.getBloque(z.getX()-1, z.getY()-1);
+			rotaW = grilla.getBloque(w.getX(), w.getY()-2);
+			rotaX = grilla.getBloque(x.getX()+1, x.getY()+1);
+			if(rotaZ.ocupado() == false && rotaW.ocupado() == false && rotaX.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(x, rotaX);
+				swap(w, rotaW);
+				rotacion++;
+			}
+		}
+		
+		if(rotacion == 2) {
+			rotaZ = grilla.getBloque(z.getX()-1, z.getY()+1);
+			rotaW = grilla.getBloque(w.getX()-2, w.getY());
+			rotaX = grilla.getBloque(x.getX()+1, x.getY()-1);
+			if(rotaZ.ocupado() == false && rotaW.ocupado() == false && rotaX.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(x, rotaX);
+				swap(w, rotaW);
+				rotacion++;
+			}
+		}
+		
+		if(rotacion == 3) {
+			rotaZ = grilla.getBloque(z.getX()+1, z.getY()+1);
+			rotaW = grilla.getBloque(w.getX(), w.getY()+2);
+			rotaX = grilla.getBloque(x.getX()-1, x.getY()+1);
+			if(rotaZ.ocupado() == false && rotaW.ocupado() == false && rotaX.ocupado() == false) {
+				swap(z, rotaZ);
+				swap(x, rotaX);
+				swap(w, rotaW);
+				rotacion = 0;
+			}
+		}
+	}
+
+	@Override
+	protected boolean descender() {
+		// TODO Auto-generated method stub
+		boolean toreturn = false;
+		//Obtengo los bloques abajo del tetrimino
+		Bloque abajoW = grilla.getBloque(w.getX()+1, w.getY());
+		Bloque abajoX = grilla.getBloque(x.getX()+1, x.getY());
+		Bloque abajoY = grilla.getBloque(y.getX()+1, y.getY());
+		Bloque abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+		
+		if(rotacion == 0) {
+			if(abajoX.ocupado() == false && abajoZ.ocupado() == false && abajoY.ocupado() == false){
+				swap(y, abajoY);
+				swap(z, abajoZ);
+				swap(x, abajoX);
+				abajoW = grilla.getBloque(w.getX()+1, w.getY());
+				swap(w, abajoW);
+				toreturn = true;
+			}
+		}
+		
+		if(rotacion == 1) {
+			if(abajoW.ocupado() == false && abajoZ.ocupado() == false){
+				swap(z, abajoZ);
+				swap(w, abajoW);
+				abajoY = grilla.getBloque(y.getX()+1, y.getY());
+				swap(y, abajoY);
+				abajoX = grilla.getBloque(x.getX()+1, x.getY());
+				swap(x, abajoX);
+				toreturn = true;
+			}
+		}
+		
+		if(rotacion == 2) {
+			if(abajoX.ocupado() == false && abajoY.ocupado() == false && abajoW.ocupado() == false){
+				swap(w, abajoW);
+				swap(x, abajoX);
+				swap(y, abajoY);
+				abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+				swap(z, abajoZ);
+				toreturn = true;
+			}
+		}
+		
+		if(rotacion == 3) {
+			if(abajoX.ocupado() == false && abajoW.ocupado() == false){
+				swap(w, abajoW);
+				swap(x, abajoX);
+				abajoY = grilla.getBloque(y.getX()+1, y.getY());
+				swap(y, abajoY);
+				abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+				swap(z, abajoZ);
+				toreturn = true;
+			}
+		}
+		
+		return toreturn;
+	}
 }

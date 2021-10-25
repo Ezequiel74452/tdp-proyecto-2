@@ -195,5 +195,64 @@ public class J_Tetrimino extends Tetrimino {
 			}
 		}
 	}
+
+	@Override
+	protected boolean descender() {
+		// TODO Auto-generated method stub
+		boolean toreturn = false;
+		//Obtengo los bloques abajo del tetrimino
+		Bloque abajoW = grilla.getBloque(w.getX()+1, w.getY());
+		Bloque abajoX = grilla.getBloque(x.getX()+1, x.getY());
+		Bloque abajoY = grilla.getBloque(y.getX()+1, y.getY());
+		Bloque abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+		
+		if(rotacion == 0) {
+			if(abajoX.ocupado() == false && abajoZ.ocupado() == false && abajoW.ocupado() == false){
+				swap(w, abajoW);
+				swap(z, abajoZ);
+				swap(x, abajoX);
+				abajoY = grilla.getBloque(y.getX()+1, y.getY());
+				swap(y, abajoY);
+				toreturn = true;
+			}
+		}
+		
+		if(rotacion == 1) {
+			if(abajoY.ocupado() == false && abajoZ.ocupado() == false){
+				swap(z, abajoZ);
+				swap(y, abajoY);
+				abajoX = grilla.getBloque(x.getX()+1, x.getY());
+				swap(x, abajoX);
+				abajoW = grilla.getBloque(w.getX()+1, w.getY());
+				swap(w, abajoW);
+				toreturn = true;
+			}
+		}
+		
+		if(rotacion == 2) {
+			if(abajoX.ocupado() == false && abajoY.ocupado() == false && abajoW.ocupado() == false){
+				swap(w, abajoW);
+				swap(x, abajoX);
+				swap(y, abajoY);
+				abajoZ = grilla.getBloque(z.getX()+1, z.getY());
+				swap(z, abajoZ);
+				toreturn = true;
+			}
+		}
+		
+		if(rotacion == 3) {
+			if(abajoZ.ocupado() == false && abajoW.ocupado() == false){
+				swap(w, abajoW);
+				swap(z, abajoZ);
+				abajoX = grilla.getBloque(x.getX()+1, x.getY());
+				swap(x, abajoX);
+				abajoY = grilla.getBloque(y.getX()+1, y.getY());
+				swap(y, abajoY);
+				toreturn = true;
+			}
+		}
+		
+		return toreturn;
+	}
 	
 }
