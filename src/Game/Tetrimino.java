@@ -90,6 +90,6 @@ public abstract class Tetrimino {
 		return toreturn;
 	}
 	
-	protected abstract boolean descender();
+	public abstract boolean descender();
 	
 }

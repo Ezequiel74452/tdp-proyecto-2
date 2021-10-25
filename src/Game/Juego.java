@@ -10,8 +10,8 @@ import TetrisGUI.GUI1;
 
 public class Juego {
 	
-	protected static GUI1 miVentana;
-	protected Grilla grilla;
+	private static GUI1 miVentana;
+	private Grilla grilla;
 	private int puntos;
 	private Tetrimino tactual;
 	private boolean gameOver;

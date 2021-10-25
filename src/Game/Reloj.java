@@ -28,6 +28,5 @@ public class Reloj implements Runnable {
 			this.Tet.operarJuego(3);
 			Tet.actualizarTiempo((int)tiempo);
 		}
-	}
-	
+	}	
 }

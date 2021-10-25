@@ -197,7 +197,7 @@ public class J_Tetrimino extends Tetrimino {
 	}
 
 	@Override
-	protected boolean descender() {
+	public boolean descender() {
 		// TODO Auto-generated method stub
 		boolean toreturn = false;
 		//Obtengo los bloques abajo del tetrimino
