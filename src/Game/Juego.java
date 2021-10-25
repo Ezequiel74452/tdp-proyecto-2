@@ -35,7 +35,7 @@ public class Juego {
 		gameOver=false;			
 	}
 	
-	public int getNext() {
+	private int getNext() {
 		Random ran = new Random();
 		int num = ran.nextInt(7);
 		return num;
@@ -51,7 +51,7 @@ public class Juego {
 		}
 	}
 		
-	public Tetrimino crearTetrimino(int num) {
+	private Tetrimino crearTetrimino(int num) {
 		Tetrimino t = null;
 		switch (num) {
 		case 0: t= new T_Tetrimino(grilla.getBloque(2, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
@@ -92,7 +92,7 @@ public class Juego {
 		tactual.moverDer();
 	}
 	
-	public void rotar() {	   
+	private void rotar() {	   
 		tactual.rotar();		
 	}
 	
@@ -172,10 +172,6 @@ public class Juego {
 	
 	public void actualizarVentana(int i, int j, ImageIcon textura) {
 		miVentana.actualizar(i,j,textura);		
-	}
-
-	public Grilla getGrilla() {
-		return grilla;
 	}
 
 	public void actualizarTiempo(int tiempo) {

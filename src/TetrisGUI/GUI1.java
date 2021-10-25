@@ -46,7 +46,6 @@ public class GUI1 extends JFrame {
 	
 	private void initialize() {
 		
-	
 		width = 360;
 		height = 690;
 		
@@ -64,7 +63,6 @@ public class GUI1 extends JFrame {
 		panelIzq.setBounds(0, 0, width, height);
 		getContentPane().add(panelIzq);
 		panelIzq.setLayout(new GridLayout(23, 12, 0, 0));
-	
 	
 		JPanel panelDer = new JPanel();
 		panelDer.setBounds(width, 0, 200, height);
@@ -125,76 +123,53 @@ public class GUI1 extends JFrame {
 			}
 		}
 		
-			this.addKeyListener(new KeyListener() {
-			
-			public void keyTyped(KeyEvent e) {}
-	
-			public void keyPressed(KeyEvent e) {
-				char c = e.getKeyChar();
-				if(c == 'a' || c=='A') {
-					miJuego.operarJuego(1);
-				} else if (c == 'd' || c=='D') {
-					miJuego.operarJuego(2);
-				} else if (c == 's'|| c=='S') {
-					miJuego.operarJuego(3);
-				} else if (c == 'q'|| c=='Q') {
-					miJuego.operarJuego(4);
-				} 
-			}
-	
-			public void keyReleased(KeyEvent e) {}
-		});
+		this.addKeyListener(new KeyListener() {
 		
-			Clip clip;
-			Random ran = new Random();
-			try {
-				clip = AudioSystem.getClip();
-				AudioInputStream inputStream;
-				if (ran.nextInt(1000) == 420) {
-					inputStream = AudioSystem.getAudioInputStream(
-							getClass().getResourceAsStream("/Sonidos/GiornosTheme.wav"));
-				    clip.open(inputStream);
-				} else {
-					inputStream = AudioSystem.getAudioInputStream(
-							getClass().getResourceAsStream("/Sonidos/Music.wav"));
-						    clip.open(inputStream);
-				}
-				clip.start();
-				
-			} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
-				e1.printStackTrace();
-			}
-			
-				
+		public void keyTyped(KeyEvent e) {}
+
+		public void keyPressed(KeyEvent e) {
+			char c = e.getKeyChar();
+			if(c == 'a' || c=='A') {
+				miJuego.operarJuego(1);
+			} else if (c == 'd' || c=='D') {
+				miJuego.operarJuego(2);
+			} else if (c == 's'|| c=='S') {
+				miJuego.operarJuego(3);
+			} else if (c == 'q'|| c=='Q') {
+				miJuego.operarJuego(4);
+			} 
+		}
+
+		public void keyReleased(KeyEvent e) {}
+		});
 	
+		Clip clip;
+		Random ran = new Random();
+		try {
+			clip = AudioSystem.getClip();
+			AudioInputStream inputStream;
+			if (ran.nextInt(1000) == 420) {
+				inputStream = AudioSystem.getAudioInputStream(
+						getClass().getResourceAsStream("/Sonidos/GiornosTheme.wav"));
+			    clip.open(inputStream);
+			} else {
+				inputStream = AudioSystem.getAudioInputStream(
+						getClass().getResourceAsStream("/Sonidos/Music.wav"));
+					    clip.open(inputStream);
+			}
+			clip.start();
+			
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
+			e1.printStackTrace();
+		}								
 	}
 	
 	public void actualizar(int i, int j, ImageIcon nuevaImg){
         casillas[i][j].setIcon(new ImageIcon (nuevaImg.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
     }
 	
-	/*
-	public static void actualizarLinea(int l) {
-		for(int i=1; i<12; i++) {
-			casillas[l][i].setIcon(new ImageIcon(tetris.obtenerBloque(l, i).getTextura().getImage().getScaledInstance((int) (width/12), (int) (height/23), Image.SCALE_DEFAULT)));
-		}
-	}*/
-	
-	/*
-	public void actualizarNext(int x, int y,int x1,int y1,int x2, int y2,int x3, int y3, ImageIcon icon) {
-		for(int i=0; i<4; i++) {
-			for(int j=0; j<4; j++) {
-				casillasSiguiente[i][j].setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Bloques/Empty.png")).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-			}
-		}
-		casillasSiguiente[x][y].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-		casillasSiguiente[x1][y1].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-		casillasSiguiente[x2][y2].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-		casillasSiguiente[x3][y3].setIcon(new ImageIcon (icon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-	}*/
-	
-	public void actualizarNext(int x) {
-		switch (x) {
+	public void actualizarNext(int n) {
+		switch (n) {
 		case 0: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/T_celeste.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
 		case 1: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/O_amarillo.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
 		case 2: lbl_next.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/Texturas/Tetriminos/I_naranja.png")).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT)));break;
