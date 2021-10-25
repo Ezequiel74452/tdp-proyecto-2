@@ -144,7 +144,7 @@ public class L_Tetrimino extends Tetrimino {
 			}
 		}
 		
-		if(rotacion == 1) {
+		else if(rotacion == 1) {
 			rotaZ = grilla.getBloque(z.getX()-1, z.getY()-1);
 			rotaW = grilla.getBloque(w.getX(), w.getY()-2);
 			rotaX = grilla.getBloque(x.getX()+1, x.getY()+1);
@@ -156,7 +156,7 @@ public class L_Tetrimino extends Tetrimino {
 			}
 		}
 		
-		if(rotacion == 2) {
+		else if(rotacion == 2) {
 			rotaZ = grilla.getBloque(z.getX()-1, z.getY()+1);
 			rotaW = grilla.getBloque(w.getX()-2, w.getY());
 			rotaX = grilla.getBloque(x.getX()+1, x.getY()-1);
@@ -168,10 +168,10 @@ public class L_Tetrimino extends Tetrimino {
 			}
 		}
 		
-		if(rotacion == 3) {
+		else if(rotacion == 3) {
 			rotaZ = grilla.getBloque(z.getX()+1, z.getY()+1);
 			rotaW = grilla.getBloque(w.getX(), w.getY()+2);
-			rotaX = grilla.getBloque(x.getX()-1, x.getY()+1);
+			rotaX = grilla.getBloque(x.getX()-1, x.getY()-1);
 			if(rotaZ.ocupado() == false && rotaW.ocupado() == false && rotaX.ocupado() == false) {
 				swap(z, rotaZ);
 				swap(x, rotaX);

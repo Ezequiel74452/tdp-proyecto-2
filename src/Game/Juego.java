@@ -13,7 +13,7 @@ public class Juego {
 	protected static GUI1 miVentana;
 	protected Grilla grilla;
 	private int puntos;
-	private Tetrimino tactual, tsiguiente;
+	private Tetrimino tactual;
 	private boolean gameOver;
 	public static final int MoverI = 1;
 	public static final int MoverD = 2;
@@ -51,30 +51,6 @@ public class Juego {
 		}
 	}
 		
-	/*
-	public Tetrimino crearTetrimino() {
-		Random ran = new Random();
-		int num = ran.nextInt(7);
-		Tetrimino t = null;
-		switch (num) {
-		case 0: t= new T_Tetrimino(grilla.getBloque(2, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
-		break;
-		case 1: t= new J_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 6), 0, grilla);
-		break;
-		case 2: t= new L_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
-		break;
-		case 3: t= new O_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
-		break;
-		case 4: t= new I_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(1, 7), 1, grilla);
-		break;
-		case 5: t= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
-		break;
-		case 6: t= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
-		break;
-		}
-		return t;
-	}
-	*/
 	public Tetrimino crearTetrimino(int num) {
 		Tetrimino t = null;
 		switch (num) {
@@ -90,63 +66,12 @@ public class Juego {
 		break;
 		case 5: t= new J_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 6), 0, grilla);
 		break;
-		case 6: t= new L_Tetrimino(grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		case 6: t= new L_Tetrimino(grilla.getBloque(2, 4), grilla.getBloque(1, 6), grilla.getBloque(1, 5), grilla.getBloque(1, 4), 2, grilla);
 		break;
 		}
 		return t;
 	}
-	
-	/*
-	public Tetrimino crearSiguiente() {
-		Random ran = new Random();
-		int num = ran.nextInt(7);
-		Random ran2 = new Random();
-		int col = ran2.nextInt(7)+2;
-		switch (num) {
-		case 0: tsiguiente= new T_Tetrimino(col);
-		break;
-		case 1: tsiguiente= new J_Tetrimino(col);
-		break;
-		case 2: tsiguiente= new L_Tetrimino(col);
-		break;
-		case 3: tsiguiente= new O_Tetrimino(col);
-		break;
-		case 4: tsiguiente= new I_Tetrimino(col);
-		break;
-		case 5: tsiguiente= new S_Tetrimino(col);
-		break;
-		case 6: tsiguiente= new Z_Tetrimino(col);
-		break;
-		}
-		return tsiguiente;
-	}*/
-	
-	/*private void setTetrimino(Tetrimino tr) {
 		
-		for(int i=1; i<3; i++) {
-			for(int j=4; j<8 ; j++) {
-				if (tr!=null && tr.getBloquePos(i-1, j-4)!=null) {
-					
-					if(!grilla[i][j].esSobre())
-					{
-						GameOver=true;
-						GUI2.actualizar();
-						GUI2.gameOver();	
-						break;
-					}												
-					setBloque(tr.getBloquePos(i-1, j-4), i, j);					
-					grilla[i][j].setX(i);
-					grilla[i][j].setY(j);
-					
-				}
-				
-			}
-			if(GameOver)
-				break;
-		}
-	
-	}*/
-	
 	private void setTetrimino(Tetrimino tr) {
 		if(grilla.getBloque(tr.getW().getX(), tr.getW().getY()).ocupado() ||
 				grilla.getBloque(tr.getX().getX(), tr.getX().getY()).ocupado() ||
@@ -158,11 +83,7 @@ public class Juego {
 		if(gameOver)
 			miVentana.gameOver();		
 	}
-	
-	public Tetrimino getSiguiente() {
-		return tsiguiente;
-	}	
-	
+		
 	private void moverIzq() {
 		tactual.moverIzq();
 	}
@@ -188,11 +109,7 @@ public class Juego {
 			}
 		}			
 	}
-	
-	public Tetrimino getTetrimino() {
-		return tactual;
-	}
-	
+		
 	private void checkLineas(int min, int max) {
 		int cant=0;
 		boolean seLimpia = true;
@@ -248,27 +165,7 @@ public class Juego {
 		b2.setY(y);
 		
 	}
-	
-	/*
-	private void limpiar(int linea) {
-		for(int i=1; i<11; i++) {
-			grilla[linea][i] = new Bloque(1);
-		}
-		GUI2.actualizarLinea(linea);
-	}
-	
-	private void bajarBloques(int l)
-	{
-		for(int j=l; j>=alturaMax; j--) {
-			for(int i=1; i<11; i++) {
-				grilla[j][i] = grilla[j-1][i];
-			}
-			GUI2.actualizarLinea(j);
-		}
-	}
-	
-	*/
-		
+			
 	public boolean getGameOver() {		
 		return gameOver;
 	}

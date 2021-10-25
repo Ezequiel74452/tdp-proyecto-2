@@ -11,9 +11,7 @@ public class Reloj implements Runnable {
 		
 		aceleracion=1000;
 		tiempo=0;
-		Tet=Tetris;
-		
-		
+		Tet=Tetris;				
 	}
 	
 	public void run() {
