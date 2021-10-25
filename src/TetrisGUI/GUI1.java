@@ -150,7 +150,7 @@ public class GUI1 extends JFrame {
 			try {
 				clip = AudioSystem.getClip();
 				AudioInputStream inputStream;
-				if (ran.nextInt(1000) == 622) {
+				if (ran.nextInt(1000) == 420) {
 					inputStream = AudioSystem.getAudioInputStream(
 							getClass().getResourceAsStream("/Sonidos/GiornosTheme.wav"));
 				    clip.open(inputStream);

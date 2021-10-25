@@ -145,10 +145,10 @@ public class J_Tetrimino extends Tetrimino {
 			if(rotaZ.ocupado() == false && rotaW.ocupado() == false) {
 				swap(z, rotaZ);
 				swap(w, rotaW);
-				rotaX = grilla.getBloque(x.getX(), x.getY()+1);
-				swap(x, rotaX);
 				rotaY = grilla.getBloque(y.getX()+1, y.getY());
 				swap(y, rotaY);	
+				rotaX = grilla.getBloque(x.getX(), x.getY()+1);
+				swap(x, rotaX);
 				rotacion++;
 			}
 		}

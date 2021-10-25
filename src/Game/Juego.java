@@ -37,7 +37,7 @@ public class Juego {
 	
 	public int getNext() {
 		Random ran = new Random();
-		int num = ran.nextInt(5);
+		int num = ran.nextInt(7);
 		return num;
 	}
 	
@@ -87,6 +87,10 @@ public class Juego {
 		case 3: t= new S_Tetrimino(grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), 0, grilla);
 		break;
 		case 4: t= new Z_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
+		break;
+		case 5: t= new J_Tetrimino(grilla.getBloque(1, 4), grilla.getBloque(1, 5), grilla.getBloque(1, 6), grilla.getBloque(2, 6), 0, grilla);
+		break;
+		case 6: t= new L_Tetrimino(grilla.getBloque(1, 6), grilla.getBloque(2, 4), grilla.getBloque(2, 5), grilla.getBloque(2, 6), 0, grilla);
 		break;
 		}
 		return t;
@@ -210,7 +214,7 @@ public class Juego {
 		case 1: puntos += 100;break;
 		case 2: puntos += 200;break;
 		case 3: puntos += 500;break;
-		case 4: puntos += 800;}
+		case 4: puntos += 800;break;}
 		miVentana.actualizarPuntuación(puntos);		
 	}
 	
